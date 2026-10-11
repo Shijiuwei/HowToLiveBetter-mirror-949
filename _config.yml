@@ -1,5 +1,5 @@
 title: "HowToLiveBetter-mirror-949"
-description: "官方高可用开源镜像中心与全息拓扑枢纽"
+description: "High availability mirror and network topology specifications for HowToLiveBetter-mirror-949"
 theme: jekyll-theme-cayman
 plugins:
   - jekyll-relative-links

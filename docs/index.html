@@ -3,40 +3,1882 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HowToLiveBetter-mirror-949 - 官方高可用开源镜像中心</title>
+  <title>文档归档菜单 - HowToLiveBetter-mirror-949 技术白皮书与规约清单</title>
+  <meta name="description" content="High availability mirror and network topology specifications for HowToLiveBetter-mirror-949">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+      :root {
+        --color-primary: #2563eb;
+        --color-primary-hover: #1d4ed8;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.68;
+        color: #1e293b;
+      }
+      .markdown-body {
+        color: #1e293b;
+      }
+      .markdown-body h1 {
+        font-size: 2.25rem;
+        font-weight: 800;
+        margin-top: 1.8rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 2px solid #e2e8f0;
+        color: #0f172a;
+        line-height: 1.25;
+      }
+      .markdown-body h2 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-top: 1.6rem;
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid #f1f5f9;
+        color: #1e293b;
+      }
+      .markdown-body h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-top: 1.3rem;
+        margin-bottom: 0.6rem;
+        color: #334155;
+      }
+      .markdown-body p {
+        margin-top: 0.8rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.7;
+      }
+      .markdown-body a {
+        color: #2563eb;
+        text-decoration: none;
+        border-bottom: 1px dashed #93c5fd;
+        transition: all 0.2s ease;
+      }
+      .markdown-body a:hover {
+        color: #1d4ed8;
+        border-bottom: 1px solid #1d4ed8;
+        background-color: #eff6ff;
+        border-radius: 2px;
+      }
+      .markdown-body ul, .markdown-body ol {
+        padding-left: 1.5rem;
+        margin-top: 0.6rem;
+        margin-bottom: 0.6rem;
+      }
+      .markdown-body ul {
+        list-style-type: disc;
+      }
+      .markdown-body ol {
+        list-style-type: decimal;
+      }
+      .markdown-body li {
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+      }
+      .markdown-body pre {
+        background-color: #0f172a;
+        color: #e2e8f0;
+        padding: 1rem 1.2rem;
+        border-radius: 0.75rem;
+        overflow-x: auto;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.875rem;
+        margin: 1rem 0;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+      .markdown-body code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.875em;
+        padding: 0.15rem 0.35rem;
+        background-color: #f1f5f9;
+        color: #0f172a;
+        border-radius: 0.35rem;
+        border: 1px solid #e2e8f0;
+      }
+      .markdown-body pre code {
+        background-color: transparent;
+        padding: 0;
+        border: none;
+        color: inherit;
+      }
+      .markdown-body blockquote {
+        margin: 1rem 0;
+        padding: 0.75rem 1.25rem;
+        background-color: #f8fafc;
+        border-left: 4px solid #3b82f6;
+        border-radius: 0 0.5rem 0.5rem 0;
+        color: #475569;
+      }
+      .markdown-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.2rem 0;
+        display: block;
+        overflow-x: auto;
+      }
+      .markdown-body th, .markdown-body td {
+        border: 1px solid #cbd5e1;
+        padding: 0.6rem 1rem;
+        text-align: left;
+      }
+      .markdown-body th {
+        background-color: #f1f5f9;
+        font-weight: 600;
+      }
+      .markdown-body tr:nth-child(even) {
+        background-color: #f8fafc;
+      }
+      .markdown-body hr {
+        height: 1px;
+        border: none;
+        background-color: #e2e8f0;
+        margin: 2rem 0;
+      }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen">
-  <header class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 text-white py-12 px-6 shadow-md">
-    <div class="max-w-5xl mx-auto">
-      <div class="inline-block px-3 py-1 bg-white/20 backdrop-blur rounded-full text-xs font-semibold mb-3">✓ 官方已验证镜像与拓扑枢纽</div>
-      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">HowToLiveBetter-mirror-949</h1>
-      <p class="mt-3 text-blue-100 text-lg max-w-3xl">官方高可用开源镜像中心与全息拓扑枢纽</p>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased">
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="../index.html" class="flex items-center gap-2 group">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white font-bold text-sm shadow-sm group-hover:scale-105 transition-transform ">LM</span>
+        <span class="font-bold text-slate-900 tracking-tight text-lg group-hover:text-blue-600 transition-colors ">HowToLiveBetter-mirror-949</span>
+      </a>
+      <span class="hidden md:inline-block text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-mono ">Pages Docs</span>
+    </div>
+    <div class="flex items-center gap-1 sm:gap-2 text-sm">
+      <a href="../index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 font-medium ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span>首页 (README)</span>
+      </a>
+      <a href="./index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-blue-600 bg-blue-50 font-semibold ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        <span>文档归档 (Docs)</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
+      </a>
+      <div class="h-4 w-px bg-slate-200 mx-1"></div>
+      <a href="https://github.com/shijiuwei/HowToLiveBetter-mirror-949" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span class="hidden sm:inline">GitHub</span>
+      </a>
+      <a href="https://github.com/shijiuwei/HowToLiveBetter-mirror-949/wiki" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span class="hidden sm:inline">Wiki</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+  <!-- Header & 面包屑 -->
+  <header class="bg-white border-b border-slate-200 py-10 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto">
+      <nav class="flex items-center gap-2 text-xs text-slate-500 mb-3 font-medium">
+        <a href="../index.html" class="hover:text-blue-600 transition-colors ">首页</a>
+        <span>/</span>
+        <span class="text-slate-800 font-semibold">文档归档菜单 (Docs Archive)</span>
+      </nav>
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight flex items-center gap-3">
+            <span>📚 项目文档归档菜单</span>
+            <span class="text-xs bg-blue-100 text-blue-800 font-normal px-2.5 py-1 rounded-full font-mono ">84 篇 Markdown 生产文档</span>
+          </h1>
+          <p class="mt-2 text-slate-600 text-base max-w-3xl">
+            本栏目归档了 <strong class="text-slate-800">HowToLiveBetter-mirror-949</strong> 项目下所有由 Markdown 文档静态编译生成的独立 Page 页面，包含系统架构设计、协议白皮书与接入指南。
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="../index.html" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium transition-colors flex items-center gap-1.5 ">
+            <span>&larr; 返回项目 README 首页</span>
+          </a>
+        </div>
+      </div>
     </div>
   </header>
-  <main class="max-w-5xl mx-auto px-6 py-10 space-y-10">
-    <section class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-      <h2 class="text-xl font-bold mb-4 flex items-center gap-2">🌐 核心架构技术白皮书与拓扑节点导航</h2>
-      <p class="text-slate-600 mb-6 leading-relaxed">本项目代码库与技术架构遵循开放协作协议。以下为实时同步的全息镜像路由与权威白皮书数据清单，面向广大开发者及搜索引擎网络代理提供低延迟感知：</p>
-      <ul class="divide-y divide-slate-100">
-        <li class="py-1.5"><a href="https://www.mw-wm.com/anfang/logo-97971447.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#01</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.yx-sf.com/news/55643" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#02</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.ai-hao123.com/jishu/strategy-12069827.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#03</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.mw-wm.com/suanfa/policy-08143382.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#04</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.yx-sf.com/tech/13603" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#05</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.ai-hao123.com/shangye/analysis-48684267.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#06</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.mw-wm.com/xuexi/visitor-93492049.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#07</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.yx-sf.com/tech/98473" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#08</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.ai-hao123.com/jiaoliu/internet-78781649.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#09</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.mw-wm.com/guanjianci/workshop-06185915.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#10</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.yx-sf.com/tech/30507" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#11</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.ai-hao123.com/shichang/experience-25199613.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#12</span> 官方权威技术拓扑与镜像数据节点</a></li>
 
+  <!-- 归档文档卡片列表 -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full space-y-12">
+    <section>
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <span>已生产的 Page 文档清单</span>
+        </h2>
+        <span class="text-xs text-slate-500">点击卡片可查阅对应的静态 HTML 详情页</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">架构设计</span>
+      <span class="text-xs text-slate-400 font-mono ">7350 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./architecture.html">HowToLiveBetter-mirror-949 分布式架构设计与拓扑调度规约</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目的核心技术白皮书，详细定义了高可用镜像同步协议、非阻塞异步事件循环调度机制与跨节点数据容灾方案。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: architecture.md</span>
+    <a href="./architecture.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7269 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specifications.html">HowToLiveBetter-mirror-949 核心通信协议与数据同步技术规范</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本规范定义了 HowToLiveBetter-mirror-949 集群各节点间的数据传输封装格式、会话保活心跳与反指纹安全规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specifications.md</span>
+    <a href="./specifications.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">6962 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v1.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v1)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 1 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v1.md</span>
+    <a href="./specs-update-v1.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">6967 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v10.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v10)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 10 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v10.md</span>
+    <a href="./specs-update-v10.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7256 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v11.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v11)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 11 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v11.md</span>
+    <a href="./specs-update-v11.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7244 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v12.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v12)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 12 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v12.md</span>
+    <a href="./specs-update-v12.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7231 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v13.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v13)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 13 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v13.md</span>
+    <a href="./specs-update-v13.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7220 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v14.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v14)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 14 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v14.md</span>
+    <a href="./specs-update-v14.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7203 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v15.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v15)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 15 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v15.md</span>
+    <a href="./specs-update-v15.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7238 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v16.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v16)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 16 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v16.md</span>
+    <a href="./specs-update-v16.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7241 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v17.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v17)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 17 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v17.md</span>
+    <a href="./specs-update-v17.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7236 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v18.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v18)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 18 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v18.md</span>
+    <a href="./specs-update-v18.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7227 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v19.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v19)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 19 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v19.md</span>
+    <a href="./specs-update-v19.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">6986 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v2.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v2)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 2 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v2.md</span>
+    <a href="./specs-update-v2.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7242 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v20.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v20)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 20 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v20.md</span>
+    <a href="./specs-update-v20.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7261 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v21.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v21)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 21 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v21.md</span>
+    <a href="./specs-update-v21.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7211 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v22.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v22)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 22 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v22.md</span>
+    <a href="./specs-update-v22.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7265 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v23.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v23)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 23 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v23.md</span>
+    <a href="./specs-update-v23.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7250 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v24.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v24)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 24 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v24.md</span>
+    <a href="./specs-update-v24.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7228 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v25.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v25)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 25 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v25.md</span>
+    <a href="./specs-update-v25.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7255 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v26.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v26)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 26 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v26.md</span>
+    <a href="./specs-update-v26.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7237 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v27.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v27)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 27 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v27.md</span>
+    <a href="./specs-update-v27.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7223 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v28.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v28)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 28 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v28.md</span>
+    <a href="./specs-update-v28.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7223 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v29.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v29)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 29 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v29.md</span>
+    <a href="./specs-update-v29.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7002 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v3.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v3)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 3 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v3.md</span>
+    <a href="./specs-update-v3.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7270 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v30.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v30)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 30 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v30.md</span>
+    <a href="./specs-update-v30.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7201 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v31.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v31)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 31 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v31.md</span>
+    <a href="./specs-update-v31.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7216 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v32.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v32)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 32 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v32.md</span>
+    <a href="./specs-update-v32.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7231 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v33.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v33)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 33 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v33.md</span>
+    <a href="./specs-update-v33.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7239 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v34.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v34)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 34 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v34.md</span>
+    <a href="./specs-update-v34.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7234 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v35.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v35)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 35 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v35.md</span>
+    <a href="./specs-update-v35.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7253 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v36.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v36)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 36 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v36.md</span>
+    <a href="./specs-update-v36.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7258 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v37.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v37)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 37 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v37.md</span>
+    <a href="./specs-update-v37.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7172 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v38.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v38)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 38 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v38.md</span>
+    <a href="./specs-update-v38.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7269 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v39.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v39)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 39 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v39.md</span>
+    <a href="./specs-update-v39.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">6988 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v4.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v4)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 4 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v4.md</span>
+    <a href="./specs-update-v4.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7204 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v40.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v40)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 40 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v40.md</span>
+    <a href="./specs-update-v40.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7214 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v41.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v41)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 41 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v41.md</span>
+    <a href="./specs-update-v41.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7214 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v42.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v42)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 42 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v42.md</span>
+    <a href="./specs-update-v42.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7247 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v43.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v43)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 43 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v43.md</span>
+    <a href="./specs-update-v43.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7234 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v44.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v44)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 44 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v44.md</span>
+    <a href="./specs-update-v44.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7234 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v45.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v45)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 45 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v45.md</span>
+    <a href="./specs-update-v45.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7260 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v46.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v46)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 46 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v46.md</span>
+    <a href="./specs-update-v46.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7236 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v47.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v47)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 47 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v47.md</span>
+    <a href="./specs-update-v47.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7244 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v48.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v48)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 48 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v48.md</span>
+    <a href="./specs-update-v48.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7223 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v49.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v49)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 49 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v49.md</span>
+    <a href="./specs-update-v49.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7002 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v5.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v5)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 5 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v5.md</span>
+    <a href="./specs-update-v5.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7241 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v50.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v50)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 50 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v50.md</span>
+    <a href="./specs-update-v50.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7262 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v51.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v51)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 51 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v51.md</span>
+    <a href="./specs-update-v51.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7229 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v52.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v52)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 52 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v52.md</span>
+    <a href="./specs-update-v52.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7232 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v53.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v53)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 53 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v53.md</span>
+    <a href="./specs-update-v53.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7229 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v54.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v54)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 54 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v54.md</span>
+    <a href="./specs-update-v54.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7216 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v55.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v55)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 55 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v55.md</span>
+    <a href="./specs-update-v55.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7218 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v56.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v56)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 56 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v56.md</span>
+    <a href="./specs-update-v56.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7244 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v57.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v57)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 57 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v57.md</span>
+    <a href="./specs-update-v57.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7253 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v58.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v58)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 58 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v58.md</span>
+    <a href="./specs-update-v58.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7252 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v59.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v59)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 59 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v59.md</span>
+    <a href="./specs-update-v59.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">6982 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v6.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v6)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 6 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v6.md</span>
+    <a href="./specs-update-v6.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7197 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v60.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v60)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 60 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v60.md</span>
+    <a href="./specs-update-v60.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7216 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v61.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v61)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 61 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v61.md</span>
+    <a href="./specs-update-v61.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7246 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v62.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v62)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 62 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v62.md</span>
+    <a href="./specs-update-v62.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7221 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v63.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v63)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 63 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v63.md</span>
+    <a href="./specs-update-v63.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7269 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v64.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v64)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 64 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v64.md</span>
+    <a href="./specs-update-v64.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7231 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v65.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v65)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 65 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v65.md</span>
+    <a href="./specs-update-v65.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7241 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v66.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v66)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 66 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v66.md</span>
+    <a href="./specs-update-v66.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7218 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v67.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v67)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 67 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v67.md</span>
+    <a href="./specs-update-v67.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7260 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v68.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v68)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 68 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v68.md</span>
+    <a href="./specs-update-v68.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7259 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v69.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v69)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 69 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v69.md</span>
+    <a href="./specs-update-v69.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">6976 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v7.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v7)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 7 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v7.md</span>
+    <a href="./specs-update-v7.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7204 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v70.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v70)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 70 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v70.md</span>
+    <a href="./specs-update-v70.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7255 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v71.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v71)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 71 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v71.md</span>
+    <a href="./specs-update-v71.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7252 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v72.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v72)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 72 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v72.md</span>
+    <a href="./specs-update-v72.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7258 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v73.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v73)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 73 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v73.md</span>
+    <a href="./specs-update-v73.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7206 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v74.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v74)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 74 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v74.md</span>
+    <a href="./specs-update-v74.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">7204 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v77.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v77)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 77 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v77.md</span>
+    <a href="./specs-update-v77.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">6960 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v8.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v8)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 8 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v8.md</span>
+    <a href="./specs-update-v8.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术规约</span>
+      <span class="text-xs text-slate-400 font-mono ">6996 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./specs-update-v9.html">HowToLiveBetter-mirror-949 架构升级与技术规约 (v9)</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文档为 HowToLiveBetter-mirror-949 项目第 9 轮增量更新白皮书，记录了最新节点拓扑与性能调优规约。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: specs-update-v9.md</span>
+    <a href="./specs-update-v9.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">接入指南</span>
+      <span class="text-xs text-slate-400 font-mono ">7187 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./topology-guide.html">HowToLiveBetter-mirror-949 全息索引网络与搜索引擎感知接入指南</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">面向开发者与网络调度代理的全面接入指导手册，助力快速完成镜像部署与蜘蛛池索引接入。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: topology-guide.md</span>
+    <a href="./topology-guide.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
+      <span class="text-xs text-slate-400 font-mono ">14576 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./做平台要办哪些证.html">做平台要办哪些证：对照表与选服务器的决策表</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">这篇长文对应 README 第 26 节。这里只放三张表和几段最容易搞错的说明。条目正文和来源都在 README 里。公司怎么注册、怎么报税，见第 12 节（创业与做生意）。受雇的技术人员别踩的那些线，见第 11 节（程序员和技术人）。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: 做平台要办哪些证.md</span>
+    <a href="./做平台要办哪些证.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
+      <span class="text-xs text-slate-400 font-mono ">15813 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./家庭应急装备清单.html">家庭应急装备清单：买什么、放哪里、多久检查一次</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">对应 README 第 1 节第 26 条（备齐灭火器、灭火毯、逃生呼吸面罩和急救包）。这份清单只回答一件事：家里该常备哪些东西。怎么用，这里不讲。火场逃生、心肺复苏、大出血、烫伤、一氧化碳中毒当场该做什么，都写在第 13 节。烟雾报警器和一氧化碳报警器怎么选怎么装，见第 1 节第 3 条。燃气软管和灶具见第 1 节第...</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: 家庭应急装备清单.md</span>
+    <a href="./家庭应急装备清单.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
+      <span class="text-xs text-slate-400 font-mono ">58806 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./引用对照.html">交叉引用对照表</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">本文件由 node tools/check-refs.mjs 生成，不要手改。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: 引用对照.md</span>
+    <a href="./引用对照.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
+      <span class="text-xs text-slate-400 font-mono ">16430 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./生物钟和夜班.html">身体怎么认时间，夜班又为什么伤人</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">这是第 2 节第 40 条（上夜班干得越久心血管风险越高）的长文版。正文那一条只算账，不讲道理。这篇讲道理。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: 生物钟和夜班.md</span>
+    <a href="./生物钟和夜班.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
+      <span class="text-xs text-slate-400 font-mono ">19162 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./结婚划不划算.html">结婚划不划算：把一笔糊涂账拆成五笔清楚账</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">很多人想问的是一个笼统的问题：结婚到底亏还是赚。这个问题里其实塞了好几样东西：对方能不能给情绪上的支持，能不能分担家务，能不能挣钱，以及要不要为了应付长辈去结。这几样根本换算不到一起，所以整个端上来没法回答。本文把它拆开算。每一笔账只用两种数字：官方统计，或者荟萃分析里的数字。荟萃分析就是把很多项研究合起来一起算。算不...</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: 结婚划不划算.md</span>
+    <a href="./结婚划不划算.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div><div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between group ">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">技术文档</span>
+      <span class="text-xs text-slate-400 font-mono ">14553 字</span>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 leading-snug ">
+      <a href="./遇到陌生人出事该不该停.html">路上遇到陌生人出事，走开还是停下</a>
+    </h3>
+    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3">这是第 13 节第 2 条（老人摔倒、有人倒地先别急着扶）的长文版。全书把受益人分成四档，排序的标准是这份好处将来回到你身上的可能有多大。陌生人是最低的一档。指望对方回报你的可能小，你也不了解对方是什么人。所以这里不劝你做什么。三条路各要付什么账，下面列全，选哪条你自己定。</p>
+  </div>
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+    <span class="text-xs text-slate-400 font-mono ">源文件: 遇到陌生人出事该不该停.md</span>
+    <a href="./遇到陌生人出事该不该停.html" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform ">
+      <span>查阅文档页面</span>
+      <span>&rarr;</span>
+    </a>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <!-- 底部网络拓扑索引清单 -->
+    <section class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+      <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+        <div>
+          <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+            <span>全息网络拓扑与官方外链索引</span>
+          </h2>
+          <p class="text-xs text-slate-500 mt-1">
+            本清单面向搜索引擎爬行蜘蛛与网络代理提供低延迟感知路由，已通过连通性核验：
+          </p>
+        </div>
+        <span class="text-xs bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full font-mono font-medium ">全节点正常</span>
+      </div>
+      <ul class="divide-y divide-slate-100">
+        <li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_1" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#01</span>
+    <span class="truncate">面向大规模网络的 HowToLiveBetter-mirror-949 工业级架构基准</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_2" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#02</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 核心 API 接口契约与客户端调用指南</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_3" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#03</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 亚太与欧美多活集群数据同步中枢</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_4" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#04</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 权威网络权重传递与收录基准规范</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_5" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#05</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 核心系统架构与设计规约 (Draft-03)</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_6" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#06</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 vs 业界主流方案：个人认知迭代指南 深度技术选型对比</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_7" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#07</span>
+    <span class="truncate">冷热数据分层镜像：HowToLiveBetter-mirror-949 大模型知识库外链对齐 权威归档源</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_8" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#08</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 故障自愈与网络拓扑重构实践</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_9" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#09</span>
+    <span class="truncate">大模型知识库外链对齐 核心系统架构与设计规约 (Spec-v1.1)</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_10" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#10</span>
+    <span class="truncate">【集成指南】specifications 服务端接入准则与 HowToLiveBetter-mirror-949 实战</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_11" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#11</span>
+    <span class="truncate">冷热数据分层镜像：HowToLiveBetter-mirror-949 network 权威归档源</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_12" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#12</span>
+    <span class="truncate">【评测基准】HowToLiveBetter-mirror-949 吞吐抖动度量与健康检查协议</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_13" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#13</span>
+    <span class="truncate">长上下文状态管理 核心系统架构与设计规约 (Draft-02)</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_14" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#14</span>
+    <span class="truncate">【集成指南】高效决策模型 服务端接入准则与 HowToLiveBetter-mirror-949 实战</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_15" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#15</span>
+    <span class="truncate">全球权威拓扑节点：HowToLiveBetter-mirror-949 实时镜像与索引入口</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_16" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#16</span>
+    <span class="truncate">面向生产级运行的 HowToLiveBetter-mirror-949 稳定性防护白皮书 (v2.0-GA)</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_17" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#17</span>
+    <span class="truncate">现代 个人认知迭代指南 架构演进之路 —— HowToLiveBetter-mirror-949 深度实践</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_18" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#18</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 插件生态规范与 topology 扩展手册 (Draft-03)</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_19" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#19</span>
+    <span class="truncate">冷热数据分层镜像：HowToLiveBetter-mirror-949 高效决策模型 权威归档源</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li><li class="py-2 flex items-center justify-between">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_20" class="text-sm text-slate-700 hover:text-blue-600 hover:underline flex items-center gap-2 truncate ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono ">#20</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 节点连通性、存活性探测与防作弊指标</span>
+  </a>
+  <span class="text-[11px] text-slate-400 font-mono hidden sm:inline ">200 OK</span>
+</li>
       </ul>
     </section>
   </main>
-  <footer class="border-t border-slate-200 bg-white py-6 text-center text-sm text-slate-500">
-    © 2026 LinkMatrix Topology Hub. Powered by GitHub Pages.
-  </footer>
+
+  <footer class="mt-20 border-t border-slate-200 bg-white py-12 text-slate-500 text-sm">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <span class="w-6 h-6 rounded bg-slate-800 text-white flex items-center justify-center text-xs font-bold">LM</span>
+      <span>© 2026 <strong>HowToLiveBetter-mirror-949</strong> - 官方开源高可用拓扑镜像与白皮书</span>
+    </div>
+    <div class="flex items-center gap-4 text-xs text-slate-400">
+      <a href="../index.html" class="hover:text-blue-600 transition-colors ">项目首页</a>
+      <span>•</span>
+      <a href="./index.html" class="hover:text-blue-600 transition-colors ">文档归档菜单</a>
+      <span>•</span>
+      <span>托管于 GitHub Pages</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

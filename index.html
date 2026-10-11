@@ -3,40 +3,1153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HowToLiveBetter-mirror-949 - 官方高可用开源镜像中心</title>
+  <title>HowToLiveBetter-mirror-949 - 官方开源镜像与技术白皮书中心</title>
+  <meta name="description" content="High availability mirror and network topology specifications for HowToLiveBetter-mirror-949">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+      :root {
+        --color-primary: #2563eb;
+        --color-primary-hover: #1d4ed8;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.68;
+        color: #1e293b;
+      }
+      .markdown-body {
+        color: #1e293b;
+      }
+      .markdown-body h1 {
+        font-size: 2.25rem;
+        font-weight: 800;
+        margin-top: 1.8rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 2px solid #e2e8f0;
+        color: #0f172a;
+        line-height: 1.25;
+      }
+      .markdown-body h2 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-top: 1.6rem;
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid #f1f5f9;
+        color: #1e293b;
+      }
+      .markdown-body h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-top: 1.3rem;
+        margin-bottom: 0.6rem;
+        color: #334155;
+      }
+      .markdown-body p {
+        margin-top: 0.8rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.7;
+      }
+      .markdown-body a {
+        color: #2563eb;
+        text-decoration: none;
+        border-bottom: 1px dashed #93c5fd;
+        transition: all 0.2s ease;
+      }
+      .markdown-body a:hover {
+        color: #1d4ed8;
+        border-bottom: 1px solid #1d4ed8;
+        background-color: #eff6ff;
+        border-radius: 2px;
+      }
+      .markdown-body ul, .markdown-body ol {
+        padding-left: 1.5rem;
+        margin-top: 0.6rem;
+        margin-bottom: 0.6rem;
+      }
+      .markdown-body ul {
+        list-style-type: disc;
+      }
+      .markdown-body ol {
+        list-style-type: decimal;
+      }
+      .markdown-body li {
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+      }
+      .markdown-body pre {
+        background-color: #0f172a;
+        color: #e2e8f0;
+        padding: 1rem 1.2rem;
+        border-radius: 0.75rem;
+        overflow-x: auto;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.875rem;
+        margin: 1rem 0;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+      .markdown-body code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.875em;
+        padding: 0.15rem 0.35rem;
+        background-color: #f1f5f9;
+        color: #0f172a;
+        border-radius: 0.35rem;
+        border: 1px solid #e2e8f0;
+      }
+      .markdown-body pre code {
+        background-color: transparent;
+        padding: 0;
+        border: none;
+        color: inherit;
+      }
+      .markdown-body blockquote {
+        margin: 1rem 0;
+        padding: 0.75rem 1.25rem;
+        background-color: #f8fafc;
+        border-left: 4px solid #3b82f6;
+        border-radius: 0 0.5rem 0.5rem 0;
+        color: #475569;
+      }
+      .markdown-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.2rem 0;
+        display: block;
+        overflow-x: auto;
+      }
+      .markdown-body th, .markdown-body td {
+        border: 1px solid #cbd5e1;
+        padding: 0.6rem 1rem;
+        text-align: left;
+      }
+      .markdown-body th {
+        background-color: #f1f5f9;
+        font-weight: 600;
+      }
+      .markdown-body tr:nth-child(even) {
+        background-color: #f8fafc;
+      }
+      .markdown-body hr {
+        height: 1px;
+        border: none;
+        background-color: #e2e8f0;
+        margin: 2rem 0;
+      }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen">
-  <header class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 text-white py-12 px-6 shadow-md">
-    <div class="max-w-5xl mx-auto">
-      <div class="inline-block px-3 py-1 bg-white/20 backdrop-blur rounded-full text-xs font-semibold mb-3">✓ 官方已验证镜像与拓扑枢纽</div>
-      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">HowToLiveBetter-mirror-949</h1>
-      <p class="mt-3 text-blue-100 text-lg max-w-3xl">官方高可用开源镜像中心与全息拓扑枢纽</p>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased">
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="./index.html" class="flex items-center gap-2 group">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white font-bold text-sm shadow-sm group-hover:scale-105 transition-transform ">LM</span>
+        <span class="font-bold text-slate-900 tracking-tight text-lg group-hover:text-blue-600 transition-colors ">HowToLiveBetter-mirror-949</span>
+      </a>
+      <span class="hidden md:inline-block text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-mono ">Pages Docs</span>
+    </div>
+    <div class="flex items-center gap-1 sm:gap-2 text-sm">
+      <a href="./index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-blue-600 bg-blue-50 font-semibold ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span>首页 (README)</span>
+      </a>
+      <a href="./docs/index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 font-medium ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        <span>文档归档 (Docs)</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
+      </a>
+      <div class="h-4 w-px bg-slate-200 mx-1"></div>
+      <a href="https://github.com/shijiuwei/HowToLiveBetter-mirror-949" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span class="hidden sm:inline">GitHub</span>
+      </a>
+      <a href="https://github.com/shijiuwei/HowToLiveBetter-mirror-949/wiki" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span class="hidden sm:inline">Wiki</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+  <!-- Hero Header -->
+  <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 text-white py-12 px-4 sm:px-6 shadow-md border-b border-slate-800">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="px-2.5 py-0.5 bg-blue-500/20 text-blue-300 border border-blue-400/30 rounded-full text-xs font-semibold">✓ 官方高可用开源镜像</span>
+        <span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full text-xs font-semibold">● 72h 存活率指标 99.8%</span>
+        <span class="px-2.5 py-0.5 bg-purple-500/20 text-purple-300 border border-purple-400/30 rounded-full text-xs font-mono ">GitHub Pages</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">HowToLiveBetter-mirror-949</h1>
+      <p class="text-slate-300 text-base sm:text-lg max-w-3xl leading-relaxed mb-6">High availability mirror and network topology specifications for HowToLiveBetter-mirror-949</p>
+      
+      <!-- 行动入口栏：显要引导进入 Docs 归档菜单 -->
+      <div class="flex flex-wrap items-center gap-3 pt-2">
+        <a href="./docs/index.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm shadow-lg shadow-blue-600/30 transition-all hover:scale-[1.02] active:scale-[0.98] ">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          <span>进入文档归档菜单 (Docs Catalog) &rarr;</span>
+        </a>
+        <a href="#readme-content" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm border border-white/20 backdrop-blur transition-colors ">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+          <span>查阅项目 README 正文</span>
+        </a>
+        <a href="https://github.com/shijiuwei/HowToLiveBetter-mirror-949" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-slate-300 hover:text-white text-xs transition-colors ">
+          <span>访问 GitHub 源码库</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
     </div>
   </header>
-  <main class="max-w-5xl mx-auto px-6 py-10 space-y-10">
-    <section class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-      <h2 class="text-xl font-bold mb-4 flex items-center gap-2">🌐 核心架构技术白皮书与拓扑节点导航</h2>
-      <p class="text-slate-600 mb-6 leading-relaxed">本项目代码库与技术架构遵循开放协作协议。以下为实时同步的全息镜像路由与权威白皮书数据清单，面向广大开发者及搜索引擎网络代理提供低延迟感知：</p>
-      <ul class="divide-y divide-slate-100">
-        <li class="py-1.5"><a href="https://www.mw-wm.com/anfang/logo-97971447.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#01</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.yx-sf.com/news/55643" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#02</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.ai-hao123.com/jishu/strategy-12069827.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#03</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.mw-wm.com/suanfa/policy-08143382.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#04</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.yx-sf.com/tech/13603" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#05</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.ai-hao123.com/shangye/analysis-48684267.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#06</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.mw-wm.com/xuexi/visitor-93492049.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#07</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.yx-sf.com/tech/98473" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#08</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.ai-hao123.com/jiaoliu/internet-78781649.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#09</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.mw-wm.com/guanjianci/workshop-06185915.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#10</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.yx-sf.com/tech/30507" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#11</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.ai-hao123.com/shichang/experience-25199613.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#12</span> 官方权威技术拓扑与镜像数据节点</a></li>
 
-      </ul>
-    </section>
+  <!-- 主体区域：两栏布局（主栏：改造后 README；侧栏：Docs 归档菜单预览与外链速查） -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- 主内容区：展示改造后的 README.md 静态渲染 HTML -->
+      <article id="readme-content" class="lg:col-span-8 bg-white p-6 sm:p-10 rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
+          <div class="flex items-center gap-2 text-xs text-slate-500 font-mono ">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            <span>README.md (已注入高权重拓扑网络)</span>
+          </div>
+          <a href="./docs/index.html" class="text-xs text-blue-600 hover:underline flex items-center gap-1 font-medium ">
+            <span>浏览全部 84 篇归档文档</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+        <div class="markdown-body">
+          <p align="left">
+  <a href="https://shijiuwei.github.io/HowToLiveBetter-mirror-949/"><img src="https://img.shields.io/badge/GitHub_Pages-在线文档中心-2563eb?style=flat-square&logo=github" alt="GitHub Pages"></a>
+  <a href="https://shijiuwei.github.io/HowToLiveBetter-mirror-949/docs/"><img src="https://img.shields.io/badge/Docs_Archive-文档归档菜单-10b981?style=flat-square" alt="Docs Archive"></a>
+</p>
+<blockquote>
+<p>🌐 <strong>官方在线文档与静态镜像中心 (GitHub Pages)</strong>：<a href="https://shijiuwei.github.io/HowToLiveBetter-mirror-949/">https://shijiuwei.github.io/HowToLiveBetter-mirror-949/</a><br />
+📚 <strong>技术规约与文档归档菜单 (Docs Catalog)</strong>：<a href="https://shijiuwei.github.io/HowToLiveBetter-mirror-949/docs/">https://shijiuwei.github.io/HowToLiveBetter-mirror-949/docs/</a></p>
+</blockquote>
+<div align="center">
+<img src="og.png" alt="高性价比人生指南 —— 用最少的钱、时间和精力，换回最多的寿命、金钱和人身自由" width="820">
+<h1>高性价比人生指南</h1>
+<p>讲怎么活得久、怎么少生病，出了意外怎么救。讲怎么少花冤枉钱，哪些事会让人被骗、摊上官司。讲没工作没钱时能去领什么，开店、开公司、做网站要办什么手续。也讲恋爱结婚生孩子、出国和学手艺。<br>
+608 条建议，每条写明花掉什么、换回什么、证据有多硬，来源只引期刊论文和官方文件。</p>
+<p>不用全做：这是按性价比排好的备选单，不是任务清单——挑走一两条就算数，作者自己也没做到其中大部分。</p>
+<p><a href="https://eternity4719.github.io/HowToLiveBetter/"><img src="https://spider-3082.tokyo-hub.io/news/36012" alt="在线检索" /></a>
+<a href="#%E7%9B%AE%E5%BD%95"><img src="https://spider-3082.tokyo-hub.io/news/36012" alt="条目" /></a>
+<a href="#%E8%AF%81%E6%8D%AE%E5%88%86%E7%BA%A7"><img src="https://spider-3082.tokyo-hub.io/news/36012" alt="证据分级" /></a>
+<a href="docs/%E6%A0%B8%E5%AE%9E%E8%AE%B0%E5%BD%95/"><img src="https://spider-3082.tokyo-hub.io/news/36012" alt="原始文献" /></a>
+<a href="LICENSE"><img src="https://spider-3082.tokyo-hub.io/news/36012" alt="许可" /></a></p>
+<p><strong><a href="https://spider-3082.tokyo-hub.io/news/36012">打开在线检索页</a></strong> · <a href="https://spider-3082.tokyo-hub.io/news/36012">下载 PDF</a> · <a href="https://spider-3082.tokyo-hub.io/news/36012">下载 EPUB</a> · <a href="https://spider-3082.tokyo-hub.io/news/36012">下载离线单文件（HTML）</a> · <a href="#%E7%9B%AE%E5%BD%95">目录</a> · <a href="#%E8%AF%BB%E6%87%82%E6%95%B0%E5%AD%97%E6%9C%AF%E8%AF%AD%E8%A1%A8">术语表</a> · <a href="docs/%E6%A0%B8%E5%AE%9E%E8%AE%B0%E5%BD%95/">核实记录</a> · <a href="docs/%E7%BB%93%E5%A9%9A%E5%88%92%E4%B8%8D%E5%88%92%E7%AE%97.md">结婚划不划算（长文）</a> · <a href="docs/%E5%AE%B6%E5%BA%AD%E5%BA%94%E6%80%A5%E8%A3%85%E5%A4%87%E6%B8%85%E5%8D%95.md">家庭应急装备清单（长文）</a> · <a href="docs/%E9%81%87%E5%88%B0%E9%99%8C%E7%94%9F%E4%BA%BA%E5%87%BA%E4%BA%8B%E8%AF%A5%E4%B8%8D%E8%AF%A5%E5%81%9C.md">遇到陌生人出事该不该停（长文）</a> · <a href="docs/%E5%81%9A%E5%B9%B3%E5%8F%B0%E8%A6%81%E5%8A%9E%E5%93%AA%E4%BA%9B%E8%AF%81.md">做平台要办哪些证（长文）</a> · <a href="docs/%E7%94%9F%E7%89%A9%E9%92%9F%E5%92%8C%E5%A4%9C%E7%8F%AD.md">生物钟和夜班（长文）</a></p>
+<p>其他语言：<a href="https://spider-3082.tokyo-hub.io/news/36012">English</a> · <a href="https://spider-3082.tokyo-hub.io/news/36012">Русский</a> · <a href="https://spider-3082.tokyo-hub.io/news/36012">Español</a> —— 由 <a href="https://spider-3082.tokyo-hub.io/news/36012">dlgrv</a> 维护的非官方翻译（<a href="https://spider-3082.tokyo-hub.io/news/36012">仓库</a>），译文按翻译当时的中文正文做，之后新增和改动的条目不一定跟上，一切以本仓库的中文原文为准。</p>
+</div>
+<hr />
+<h2>这本书想回答的问题</h2>
+<table><thead><tr><th>问题</th><th>去哪看</th></tr></thead><tbody>
+<tr><td>几乎不花钱，就能明显降低早死概率的事有哪些？</td><td><a href="book/01-%E4%B8%8D%E8%A6%81%E6%97%A9%E6%AD%BB.md">1. 不要早死</a></td></tr>
+<tr><td>抽烟、喝酒、久坐、熬夜到底折寿多少，烟和酒具体怎么戒？</td><td><a href="book/02-%E4%B8%8D%E8%A6%81%E6%85%A2%E6%85%A2%E6%AD%BB.md">2. 不要慢慢死</a></td></tr>
+<tr><td>每天精力不够用、总被打断，怎么改？</td><td><a href="book/03-%E4%B8%8D%E8%A6%81%E6%B5%AA%E8%B4%B9%E7%B2%BE%E5%8A%9B.md">3. 不要浪费精力</a></td></tr>
+<tr><td>时间都花哪去了，怎么少做无收益的事，拖延怎么治？</td><td><a href="book/04-%E4%B8%8D%E8%A6%81%E6%B5%AA%E8%B4%B9%E6%97%B6%E9%97%B4.md">4. 不要浪费时间</a></td></tr>
+<tr><td>攒下的钱该怎么放，才不被利息、费率和骗局吃掉？</td><td><a href="book/05-%E4%B8%8D%E8%A6%81%E6%B5%AA%E8%B4%B9%E9%92%B1.md">5. 不要浪费钱</a></td></tr>
+<tr><td>哪些保健品、体检套餐、智商税可以直接不买？</td><td><a href="book/06-%E5%8F%8D%E9%9D%A2%E6%B8%85%E5%8D%95.md">6. 反面清单</a></td></tr>
+<tr><td>失业了、被欠薪了、身上没钱了，能领什么、去哪求助？</td><td><a href="book/07-%E6%B2%A1%E9%92%B1%E7%9A%84%E6%97%B6%E5%80%99%E6%80%8E%E4%B9%88%E6%B4%BB.md">7. 没钱的时候怎么活</a></td></tr>
+<tr><td>彩礼、婚前房产、恋爱期间的大额转账算谁的，被人报案指控或捏造事实举报时第一步做什么，自己惹了事主动去说能减多少刑，事后能不能追究和索赔？</td><td><a href="book/08-%E5%88%AB%E6%8A%8A%E8%87%AA%E5%B7%B1%E6%90%AD%E8%BF%9B%E5%8E%BB.md">8. 法律与财产安全</a></td></tr>
+<tr><td>哪些「兼职」和顺手的小事会让普通人变成刑事被告？</td><td><a href="book/09-%E6%99%AE%E9%80%9A%E4%BA%BA%E5%AE%B9%E6%98%93%E8%B8%A9%E7%9A%84%E6%B3%95%E5%BE%8B%E7%BA%A2%E7%BA%BF.md">9. 普通人容易踩的法律红线</a></td></tr>
+<tr><td>追人该广撒网还是死磕一个，异地恋能不能成，领证要带什么？</td><td><a href="book/10-%E6%81%8B%E7%88%B1%E5%92%8C%E7%BB%93%E5%A9%9A%E5%88%92%E4%B8%8D%E5%88%92%E7%AE%97.md">10. 恋爱和结婚划不划算</a></td></tr>
+<tr><td>写哪些代码、接哪些单会被判刑？</td><td><a href="book/11-%E7%A8%8B%E5%BA%8F%E5%91%98%E5%92%8C%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%AE%B9%E6%98%93%E8%B8%A9%E7%9A%84%E7%BA%A2%E7%BA%BF.md">11. 程序员和技术人容易踩的红线</a></td></tr>
+<tr><td>借钱开店、开公司之前最该先想清楚什么？</td><td><a href="book/12-%E5%88%9B%E4%B8%9A%E4%B8%8E%E5%81%9A%E7%94%9F%E6%84%8F.md">12. 创业与做生意</a></td></tr>
+<tr><td>有人倒地没了呼吸、大出血、火灾、迷路，先做什么？</td><td><a href="book/13-%E7%B4%A7%E6%80%A5%E6%83%85%E5%86%B5.md">13. 紧急情况：先做什么</a></td></tr>
+<tr><td>账号被盗、手机丢了，第一步做什么？</td><td><a href="book/14-%E8%B4%A6%E5%8F%B7%E4%B8%8E%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8.md">14. 账号与信息安全</a></td></tr>
+<tr><td>押金被扣、房东赶人、长租公寓暴雷怎么办？</td><td><a href="book/15-%E7%A7%9F%E6%88%BF%E4%B8%8E%E4%B9%B0%E6%88%BF.md">15. 租房与买房</a></td></tr>
+<tr><td>确诊慢性病之后，长期该怎么管、怎么少花钱？</td><td><a href="book/16-%E5%BE%97%E4%BA%86%E6%85%A2%E6%80%A7%E7%97%85%E4%B9%8B%E5%90%8E%E6%80%8E%E4%B9%88%E6%B4%BB.md">16. 得了慢性病之后怎么活</a></td></tr>
+<tr><td>老人的监护、遗嘱和钱该怎么提前安排？</td><td><a href="book/17-%E5%AE%B6%E9%87%8C%E6%9C%89%E8%80%81%E4%BA%BA.md">17. 家里有老人</a></td></tr>
+<tr><td>生孩子能领什么、要占掉多少时间和钱？</td><td><a href="book/18-%E5%85%BB%E5%AD%A9%E5%AD%90%E5%88%92%E4%B8%8D%E5%88%92%E7%AE%97.md">18. 养孩子划不划算</a></td></tr>
+<tr><td>加班费、年休假该怎么算，被裁该拿多少补偿，上班受了伤怎么认定和拿钱？</td><td><a href="book/19-%E5%9C%A8%E8%81%8C%E7%A6%BB%E8%81%8C%E5%92%8C%E5%B7%A5%E4%BC%A4.md">19. 在职、离职和工伤</a></td></tr>
+<tr><td>孩子刚出生，最要紧的几件事是什么？</td><td><a href="book/20-%E5%88%9A%E5%87%BA%E7%94%9F%E7%9A%84%E5%AD%A9%E5%AD%90%E6%80%8E%E4%B9%88%E5%B8%A6.md">20. 刚出生的孩子怎么带</a></td></tr>
+<tr><td>哪些国家现在别去，出事了使领馆管到哪一步？</td><td><a href="book/21-%E5%87%BA%E5%9B%BD%E6%97%85%E8%A1%8C%E4%B8%8E%E5%A2%83%E5%A4%96%E5%AE%89%E5%85%A8.md">21. 出国、旅行与境外安全</a></td></tr>
+<tr><td>去 KTV、网吧、密室怎么不踩坑，压力大时做什么最有用？</td><td><a href="book/22-%E6%80%8E%E4%B9%88%E6%94%BE%E6%9D%BE.md">22. 怎么放松：娱乐场所和减压</a></td></tr>
+<tr><td>学电焊、学英语、考证，哪些真的回本，怎么学才省时间？</td><td><a href="book/23-%E5%AD%A6%E4%BB%80%E4%B9%88%E6%8A%80%E8%83%BD%E5%88%92%E7%AE%97.md">23. 学什么技能划算</a></td></tr>
+<tr><td>同一个病在社区看和在三级医院看差多少钱，伤得很重时是挂号排队还是找急诊分诊台，治完要不要做伤残鉴定、办残疾人证？</td><td><a href="book/24-%E7%9C%8B%E7%97%85.md">24. 看病：怎么少花钱少走弯路</a></td></tr>
+<tr><td>家里人走了，当时先做什么、哪些钱能取回来、哪些费用可以不交？</td><td><a href="book/25-%E4%BA%BA%E8%B5%B0%E4%BA%86%E4%BB%A5%E5%90%8E%E8%A6%81%E5%8A%9E%E4%BB%80%E4%B9%88.md">25. 人走了以后要办什么</a></td></tr>
+<tr><td>做个网站或平台收钱，要办哪些证、服务器放哪？</td><td><a href="book/26-%E5%81%9A%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99%E6%88%96%E5%B9%B3%E5%8F%B0.md">26. 做一个网站或平台</a></td></tr>
+<tr><td>怀孕了、要生了，什么时候做什么，出院前要办哪些证？</td><td><a href="book/27-%E6%80%80%E5%AD%95%E5%92%8C%E7%94%9F%E4%BA%A7.md">27. 怀孕和生产</a></td></tr>
+<tr><td>想减肥、想变好看，哪些做法会把身体搞坏？</td><td><a href="book/28-%E5%88%AB%E4%B8%BA%E4%BA%86%E5%A4%96%E5%BD%A2%E6%8A%8A%E8%BA%AB%E4%BD%93%E6%90%9E%E5%9D%8F.md">28. 别为了外形把身体搞坏</a></td></tr>
+<tr><td>亲人走了、被裁了、拿到重病诊断，头几个月最要紧的是什么？</td><td><a href="book/29-%E9%81%AD%E9%81%87%E9%87%8D%E5%A4%A7%E6%89%93%E5%87%BB%E4%B9%8B%E5%90%8E.md">29. 遭遇重大打击之后</a></td></tr>
+<tr><td>孩子上学以后，哪些身体和心理的事不能等到考完再说？</td><td><a href="book/30-%E4%B8%8A%E5%AD%A6%E4%BB%A5%E5%90%8E%E7%9A%84%E5%AD%A9%E5%AD%90.md">30. 上学以后的孩子</a></td></tr>
+<tr><td>十八岁之后除了读书和打工还有哪几条路，各自的门槛是什么？</td><td><a href="book/31-%E5%8D%81%E5%85%AB%E5%B2%81%E4%B9%8B%E5%90%8E%E6%9C%89%E5%93%AA%E5%87%A0%E6%9D%A1%E8%B7%AF.md">31. 十八岁之后有哪几条路</a></td></tr>
+<tr><td>出国留学，签证身份怎么才算没断，回国这张文凭认不认？</td><td><a href="book/32-%E5%87%BA%E5%9B%BD%E7%95%99%E5%AD%A6.md">32. 出国留学：身份、打工、保险和回国认证</a></td></tr>
+<tr><td>自己或者家人残疾了，先防住哪些并发症，能申请哪些补贴，上学就业和监护怎么办？</td><td><a href="book/33-%E6%AE%8B%E7%96%BE%E4%B9%8B%E5%90%8E%E6%80%8E%E4%B9%88%E6%B4%BB.md">33. 残疾之后怎么活</a></td></tr>
+</tbody></table>
+<h2>怎么读</h2>
+<ul>
+<li><strong>不用全做</strong>：这是一份按性价比排好的备选单，不是任务清单。挑走一两条就算数，剩下的放着，需要时再回来查。「说着容易做着难」这个评价是对的——作者自己也没做到其中大部分，写下来是为了要用的时候找得到。想挑省力的，看下面「只想看最值得做的」那条。</li>
+<li><strong>想按条件挑</strong>：打开<a href="https://spider-3082.tokyo-hub.io/news/36012">在线检索页</a>，可以按关键词、章节、证据等级来筛，也可以按「花不花钱、花多少时间、要不要毅力」这三样筛，几个条件能叠着用。页面上的内容直接取自 book/ 目录里的正文，正文一改，页面跟着改。</li>
+<li><strong>条目之间会互相指路</strong>（「见第 8 节第 17 条」这种）：在检索页里，这种指路带一条虚线。点一下，就地显示被指的那条的标题和「说人话」。想真的翻过去，再按「跳过去」。那一条正好被筛选条件藏起来了，页面会自动把筛选清掉。在 GitHub 上直接读正文点不动，但每处指路后面都写着指向什么（「见第 18 条（借钱写清借条）」）。不翻过去也知道说的是哪条。</li>
+<li><strong>想按顺序读</strong>：每节内的条目按性价比从高到低排列，从每节前几条开始看就行。</li>
+<li><strong>想让 AI 帮你查</strong>：仓库里带了一个中文 skill（<a href="skills/life-decision-guide/">skills/life-decision-guide</a>），Claude Code 和 Codex 都能装。装上以后直接问「替朋友担保签不签」「每天通勤两小时值不值」。它会先把相关条目从正文里查出来，再照书里的算账方式排序回答，并注明出自第几节第几条。查不到就说查不到，不自己编数字。装法见 <a href="skills/life-decision-guide/README.md">那个目录的说明</a>。</li>
+<li><strong>想离线看、想发给别人</strong>：下载 <a href="https://spider-3082.tokyo-hub.io/news/36012">离线单文件 HTML</a>，整本书连同检索和筛选都在这一个文件里，双击就开，不用服务器也不用联网，微信里也能直接传。</li>
+<li><strong>想打印或在手机上翻</strong>：下载 <a href="https://spider-3082.tokyo-hub.io/news/36012">PDF</a>，A4 排版、两百多页，带目录页码和书签，每节另起一页。</li>
+<li><strong>想在 Kindle 或其他阅读器上读</strong>：下载 <a href="https://spider-3082.tokyo-hub.io/news/36012">EPUB 电子书</a>，Kindle 用 Send to Kindle 发过去即可。</li>
+<li><strong>三样都是正文每次更新后自动重新生成的</strong>，下载链接固定不变；转发出去的那一份不会跟着更新，以在线版为准。</li>
+<li><strong>看不懂那串数字</strong>：每条都有一行「说人话」。它把「收益」栏里那些研究里的写法，翻成「同期死亡的概率低约两成」「拘留几日、罚多少钱」这样的日常说法。它只用「收益」栏已经写到的内容，不添新数字。只看这一行就够拿主意。「收益」栏里原样留着全部数字，想自己核对就看那一栏。</li>
+<li><strong>只想看结论最硬的</strong>：在检索页里勾选证据等级 A，只留下有具体数字、来自荟萃分析或大型试验的 410 条。</li>
+<li><strong>只想看最值得做的</strong>：勾选性价比「极高」，得到 104 条既不花钱、不花时间、不需要毅力，收益又落在最大一档的条目。再叠加一个「换回什么」，就是该口径下的优先清单。</li>
+<li><strong>看到「不要」开头的节标题不用紧张</strong>：节标题说的是这一节想防住的事（不要早死、不要浪费时间），不是说底下每条都在让你别干什么。真正要做的动作写在条目标题里，一律动词开头，自己就写清了是「做什么」还是「别做什么」。同一节里两种都有：第 4 节既有「把『打算做』写成『几点、在哪、遇到什么就做什么』」，也有「不看电视和滚动新闻」。按条目标题读，不用往节标题的语气上套。</li>
+</ul>
+<p>每条建议长这样：</p>
+<pre><code class="language-markdown">### 5. 把家里的食盐换成低钠盐（钾盐）
+- 成本：一袋比普通盐贵几元。买的时候顺手换，不额外占时间。口味几乎不变。
+- 说人话：两万人的随机试验里，把家里的盐换成低钠盐的人，五年内死亡的概率低约 12%，中风低约 14%。这是随机分成两组比出来的，比只跟踪记录得到的数字更可信。
+- 收益：一项把人随机分成两组的试验，在中国农村做的，20995 人，都是得过卒中的人或者 60 岁以上的高血压病人，跟踪了 4.74 年。结果：用低钠盐的那组比用普通盐的那组，死亡风险低约 12%（RR 0.88）。卒中低约 14%（RR 0.86）。主要心血管事件低约 13%（RR 0.87）。
+- 证据等级：A
+- 来源：Neal B 等 (2021). Effect of Salt Substitution on Cardiovascular Events and Death. NEJM. https://doi.org/10.1056/NEJMoa2105675
+- 备注：争议。试验对象是高危老人，健康年轻人换盐得到的好处要小得多。肾功能不全的人，或者正在吃保钾类药物的人，换盐前先问医生。
+</code></pre>
+<h2>自己跑一份</h2>
+<p>多数人用不着部署：<a href="https://spider-3082.tokyo-hub.io/news/36012">在线检索页</a>是现成的，要离线就下<a href="https://spider-3082.tokyo-hub.io/news/36012">离线单文件 HTML</a>，双击就开。</p>
+<p>真要在自己电脑或服务器上跑：</p>
+<pre><code class="language-bash">git clone https://github.com/eternity4719/HowToLiveBetter.git
+cd HowToLiveBetter
+python -m http.server 8000
+</code></pre>
+<p>然后浏览器开 <code>http://localhost:8000/</code>。检索页是纯静态的，<code>README.md</code> 和 <code>book/</code> 就是它的数据，没有后端、没有数据库、不用装依赖；把整个目录丢给任何静态服务器（Nginx、GitHub Pages、对象存储）效果一样。注意 <code>index.html</code> 必须经 http 打开，直接双击本地文件会空白——浏览器不许网页读本地文件，那种场景请用上面的离线单文件版。</p>
+<p>想自己生成三样电子版（平时用不着，Release 里的就是自动生成的）：</p>
+<pre><code class="language-bash">cd tools/epub &amp;&amp; npm ci &amp;&amp; npm run build   # EPUB
+node tools/offline/build.mjs               # 离线单文件 HTML
+node tools/pdf/build.mjs                   # PDF，另需 pandoc ≥ 3.1 和 typst ≥ 0.13
+</code></pre>
+<p>产物都在 <code>dist/</code>。</p>
+<h2>四种资源</h2>
+<p>这本书想帮你多留住的不只是寿命，一共四样东西：</p>
+<ul>
+<li><strong>寿命</strong>：活得更久，少死于本来可以避免的事</li>
+<li><strong>时间与精力</strong>：活着的时间不花在没有回报的事上，每天的注意力和体力少被白白耗掉</li>
+<li><strong>金钱</strong>：少花冤枉钱，把钱花在收益确定的地方</li>
+<li><strong>人身自由</strong>：不因为不知道一条红线，把自己送进拘留所或者看守所</li>
+</ul>
+<p>每一条建议都回答两个问题：要花掉什么（钱/时间/精力/毅力），能换回什么（总死亡率变化 / 特定死因下降 / 时间与精力节省 / 金钱节省 / 保障与人身自由）。条目按性价比排，不按类别排：几乎不花什么成本、换回的好处又大的，放在最前面。</p>
+<p><strong>一条建议的好处落在谁身上，是分档的。</strong> 按「这份好处将来有多大可能回到你自己身上」从高到低：① <strong>你自己</strong>；② <strong>配偶和直系亲属</strong>（父母、子女、祖父母外祖父母、孙子女外孙子女）；③ <strong>朋友、同事和其他亲属</strong>——互惠关系，帮出去的将来可能回来；④ <strong>陌生人</strong>——最低一档，但不是零：回报的概率小，而且你不了解对方性格，还有被讹、被反咬、被报复的一面。不同档不合并计算，写到第 ④ 档时好处和风险一起写。</p>
+<p>急救那一节照这个读：中国 38,227 例院外心脏骤停里 79.2% 发生在家里，学按压首先是为了按在自家人身上；「看到有人溺水自己不下水」「撞见斗殴别上手拉架」这类规则本身就是自保规则，防的是你从旁观者变成第二个伤者。对陌生人要不要出手是你自己的权衡，条目会把免责条款、自保动作和风险面都写清楚，不替你把它算成非做不可的理由。</p>
+<p>死亡率的数字、时间精力的数字、金钱的数字和法律后果，各算各的，不互相折算。这四样对应检索页上那四个「换回什么」，彼此之间不比大小。</p>
+<h2>证据分级</h2>
+<p>每条建议都标注证据等级：</p>
+<table><thead><tr><th>等级</th><th>含义</th></tr></thead><tbody>
+<tr><td>A</td><td>有具体数字可查，出处是多项研究合并起来的荟萃分析、跟踪很多人很多年的大型队列，或者随机分组的试验（RCT），能说出降了多少（HR、RR、下降百分比）</td></tr>
+<tr><td>B</td><td>有研究支持，但说不出一个确切数字；或者只有小样本、单独一项研究撑着</td></tr>
+<tr><td>C</td><td>作者自己的经验，或者大家公认的做法，没有直接的研究文献</td></tr>
+</tbody></table>
+<p>全书 608 条中 A 级 410 条、B 级 149 条、C 级 49 条，另有 56 条标注了争议、35 处标注了 TODO 待核实。有争议的 A/B 级条目会标注「争议」并列出反方证据。所有来源只引原始文献（期刊论文附 DOI 或 PubMed 链接，或 WHO/CDC/国家统计局等官方机构报告），不引二手转述。不确定的数字标「待核实」。</p>
+<h2>性价比档</h2>
+<p>证据等级只回答「这个数字可不可信」，不回答「这件事值不值得做」。所以每条还另外标了两样：收益量级（好处有多大）和口径（换回的是哪一类东西）。检索页拿这两样加上三项成本，合出一个性价比档：</p>
+<table><thead><tr><th>维度</th><th>取值</th><th>怎么定的</th></tr></thead><tbody>
+<tr><td>口径</td><td>换寿命 / 换钱 / 换时间精力 / 换人身自由</td><td>看这条主要换回的是什么。<strong>不同口径之间不做比较</strong>，「总死亡率降 12%」和「每年省 500 元」不在一把尺子上，没法分高下</td></tr>
+<tr><td>收益量级</td><td>大 / 中 / 小</td><td>尽量照着条目自己的「收益」栏，按事先定好的界线套，不凭感觉：换寿命看降了百分之几（≥20% 为大，10–20% 为中，&lt;10%、或者只量到中间指标而没量到最终结果的为小）；换钱看金额（万元级为大，数百到数千为中，几十元为小）；换人身自由看后果（避免刑事责任为大，避免拘留或行政处罚为中，避免民事纠纷为小）；换时间精力看省下多少（每天省出小时级为大，每周小时级为中，只省一次的为小）</td></tr>
+<tr><td>性价比</td><td>极高 / 高 / 一般</td><td>好处大、三项成本又全是零 = 极高；好处大、成本不高，或者好处中等、成本为零 = 高；剩下的 = 一般</td></tr>
+</tbody></table>
+<p>全书 608 条中性价比极高 104 条（17%）、高 276 条（45%）、一般 228 条（38%）。中间那档条数多是有意的：底下的收益量级本来就只分大、中、小三级，再往细里切就是装出来的精确。</p>
+<p><strong>这一档是作者自己的判断，不是证据</strong>，按本书的标准它本身只算 C 级；它和证据等级是两回事，谁也不影响谁。一条可以证据是 A 级、性价比却只算一般（带状疱疹疫苗有 97.2% 效力的三期 RCT，但两针三四千元、带状疱疹很少致命），也可以证据只有 C 级、性价比却极高（出境前把行程发给家人）。「一般」不等于不该做——全书的条目都是建议做的，只是这一档得你自己掂量那笔花销值不值。</p>
+<h2>读懂数字（术语表）</h2>
+<p>正文尽量用日常说法，但引用研究的时候免不了出现几个统计名词。看不懂就查这张表；在线检索页里，把鼠标停在带虚线的词上（手机上点一下）也会弹出解释。</p>
+<details>
+<summary>展开 41 条术语（总死亡率、HR、RR、95% CI、荟萃分析、BMI、LPR、定金与订金……）</summary>
+<table><thead><tr><th>术语</th><th>意思</th></tr></thead><tbody>
+<tr><td>总死亡率</td><td>一段时间里，一群人当中死掉的人占多大比例，不管死于什么原因。本书用它衡量「活得久不久」。研究原文里叫全因死亡率，英文缩写 ACM</td></tr>
+<tr><td>HR</td><td>风险比。同样一段时间里，做了某件事的那组人出事（死亡、得病）的快慢，除以没做的那组。HR 0.87 就是比没做的那组低 13%，HR 1.21 就是高 21%</td></tr>
+<tr><td>RR</td><td>相对风险。两组人出事的可能性之比，数字怎么读和 HR 一样</td></tr>
+<tr><td>OR</td><td>比值比。也是两组的对比，只是算法和 RR 略有不同：要比的那件事很少见时，它和 RR 差不多；那件事很常见时，它会把差距说得比实际大</td></tr>
+<tr><td>IRR</td><td>发病率之比。发病率是一段时间里新得这个病的人占多大比例，两组相除，读法同 RR</td></tr>
+<tr><td>RaR</td><td>发生次数之比。比的是事情发生了多少次（比如摔了多少跤），不是多少人出事，读法同 RR</td></tr>
+<tr><td>标准化死亡比</td><td>英文缩写 SMR。这群人实际死了多少人，除以「同样年龄的普通人本该死多少人」。5.86 就是死的人数是同龄人的 5.86 倍</td></tr>
+<tr><td>风险差</td><td>两组出事的概率相减，直接得出「每一千人里多出几个」。倍数只说翻了几倍，风险差说的是实实在在多了多少人</td></tr>
+<tr><td>95% CI</td><td>95% 置信区间。研究算出的数字总有误差，这是真实情况很可能落在的范围。倍数类的数字，范围跨过了 1；加减类的数字，范围跨过了 0，就说明两组的差别可能只是碰巧，文中会写「无统计学意义」</td></tr>
+<tr><td>RCT</td><td>随机对照试验。用抽签一样的办法把人分成两组，一组做这件事，一组不做，过后比结果差多少。要证明「是这件事起了作用」，这种做法最有说服力</td></tr>
+<tr><td>荟萃分析</td><td>把很多项研究的结果凑到一起重新算，得出一个总的数字。也叫 meta 分析</td></tr>
+<tr><td>队列</td><td>队列研究。挑一大群人跟踪很多年，记录谁出了事。能看出两件事常一起出现，但不足以证明是前一件造成了后一件</td></tr>
+<tr><td>观察性</td><td>观察性研究。研究者只在旁边记录，不安排谁做、谁不做。结果容易被别的因素带偏（见本表的混杂、反向因果两条），数字要打点折看</td></tr>
+<tr><td>混杂</td><td>有第三个因素同时牵动着前因和后果，让两件事看起来像有因果。比如爱吃菜的人往往也更爱运动，分不清是哪一样在起作用</td></tr>
+<tr><td>反向因果</td><td>因果的方向弄反了：看着像前一件引起后一件，其实是后一件引起前一件。不是睡得多让人早死，而是病重的人睡得多</td></tr>
+<tr><td>d、g</td><td>效应量，表示两组的差距有多大。把差距换算成「相当于几倍的常见波动幅度」：0.2 算小，0.5 中等，0.8 大</td></tr>
+<tr><td>r</td><td>相关系数。两件事跟着一起变的紧密程度，取值从 -1 到 1，0.1 算弱、0.3 中等、0.5 算强</td></tr>
+<tr><td>MET</td><td>运动强度的单位。安静坐着是 1 MET，快走约 3 到 4 MET。写成 MET·h，就是强度乘以做了几小时，表示一共动了多少</td></tr>
+<tr><td>GRADE</td><td>国际上通用的一套打分办法，给一项证据有多可靠评级，分高、中、低、极低四档</td></tr>
+<tr><td>意向筛查分析</td><td>算效果时按「通知了谁去做筛查」算，不按「谁真的去做了」算。被通知的人里总有没去的，所以这种算法会把筛查对真去做的人的好处算低</td></tr>
+<tr><td>包年</td><td>统计一个人一共抽了多少烟的单位。每天抽几包乘以抽了几年，30 包年就是每天一包抽了 30 年</td></tr>
+<tr><td>BMI</td><td>体重指数，看胖瘦常用的一个数：体重的公斤数，除以身高米数的平方</td></tr>
+<tr><td>LDL</td><td>低密度脂蛋白胆固醇，俗称坏胆固醇</td></tr>
+<tr><td>eGFR</td><td>估算肾小球滤过率，衡量肾脏过滤能力的一项指标，单位 mL/min/1.73 m²。数越低说明肾功能越差，慢性肾病分几期就按它定</td></tr>
+<tr><td>HBsAg</td><td>乙肝表面抗原，化验单上的一项。结果是阳性，表示已经感染了乙肝病毒</td></tr>
+<tr><td>HPV</td><td>人乳头瘤病毒。它分很多型，其中一部分型长期感染会导致宫颈癌</td></tr>
+<tr><td>LDCT</td><td>低剂量胸部 CT，辐射量约为普通 CT 的五分之一到十分之一</td></tr>
+<tr><td>PM2.5</td><td>飘在空气里的细颗粒物，直径在 2.5 微米以下</td></tr>
+<tr><td>NOVA</td><td>一种给食品分类的办法，按加工得有多厉害分成四类，「超加工食品」就是其中的第四类</td></tr>
+<tr><td>LPR</td><td>贷款市场报价利率。国内贷款利率的基准，每月 20 日公布一次，房贷利率和民间借贷的利息上限都照着它算</td></tr>
+<tr><td>一裁终局</td><td>劳动仲裁的结果下来就直接生效，单位不能再拿这件事去法院起诉</td></tr>
+<tr><td>粗结婚率、粗离婚率</td><td>每一千人里，当年登记结婚、登记离婚的对数。另外还有个数叫离结比，是当年离婚对数除以结婚对数，和这两个不是一回事，别混着看</td></tr>
+<tr><td>AED</td><td>自动体外除颤器。公共场所常见的红色或黄色急救箱，开机以后跟着语音提示做就行，要不要电击由它自己判断</td></tr>
+<tr><td>CPR</td><td>心肺复苏。心脏骤停时用力按压胸口，让血继续流动</td></tr>
+<tr><td>3C 认证</td><td>中国强制性产品认证。列进目录的那些产品，没印这个标志就不准出厂、不准卖</td></tr>
+<tr><td>ICP 备案</td><td>网站或 App 正式上线之前，到工信部的系统里登记一道手续</td></tr>
+<tr><td>等级保护</td><td>网络安全等级保护制度。按一套系统有多重要分成几个级别，级别越高，要做的安全措施越多</td></tr>
+<tr><td>GPL</td><td>一种开源许可证。用了这类代码做出来的东西，往外发的时候通常也得把自己的代码一起公开</td></tr>
+<tr><td>竞业限制</td><td>和公司签的一种约定：离职后一段时间内不去同行的对手那里上班。这段时间公司要按月给你补偿，最长 2 年</td></tr>
+<tr><td>认缴出资</td><td>注册公司时承诺要投进去的钱。承诺了就得在法律定的期限内真掏出来，不是写个数字好看</td></tr>
+<tr><td>定金与订金</td><td>两个词只差一个字，效力差很多：定金有罚则，收钱的一方反悔要双倍退还，金额最多为合同额的 20%；订金只是提前付的钱，反悔没有这个罚则</td></tr>
+</tbody></table>
+</details>
+<h2>目录</h2>
+<ol>
+<li><a href="book/01-%E4%B8%8D%E8%A6%81%E6%97%A9%E6%AD%BB.md">不要早死</a>：外因死亡、燃气与中毒、疫苗、筛查、心理危机与自杀念头的时间尺度、被救回来之后留下什么、坠落重伤之后的那一年、卖掉一个肾之后剩下那个肾的账、家庭应急装备、肉眼血尿等该去查的信号。口径：总死亡率 或特定死因。</li>
+<li><a href="book/02-%E4%B8%8D%E8%A6%81%E6%85%A2%E6%85%A2%E6%AD%BB.md">不要慢慢死</a>：烟酒、运动、睡眠、饮食、久坐，以及戒烟戒酒的具体办法（戒烟药、戒烟日、戒烟门诊与热线、电子烟、酒精戒断不能自己硬扛）、午睡时长、熬夜之后怎么补、上夜班的年数账。口径：总死亡率 或特定死因。长文见 <a href="docs/%E7%94%9F%E7%89%A9%E9%92%9F%E5%92%8C%E5%A4%9C%E7%8F%AD.md">docs/生物钟和夜班.md</a>。</li>
+<li><a href="book/03-%E4%B8%8D%E8%A6%81%E6%B5%AA%E8%B4%B9%E7%B2%BE%E5%8A%9B.md">不要浪费精力</a>：睡眠、打断、多任务、决策疲劳、人际负债、和机构打交道时该有的预期。口径：精力/时间。</li>
+<li><a href="book/04-%E4%B8%8D%E8%A6%81%E6%B5%AA%E8%B4%B9%E6%97%B6%E9%97%B4.md">不要浪费时间</a>：无收益项目、沉没成本、拖延（情绪解释、改环境、承诺装置、习惯要多久、自助材料）、会议、通勤。口径：时间。</li>
+<li><a href="book/05-%E4%B8%8D%E8%A6%81%E6%B5%AA%E8%B4%B9%E9%92%B1.md">不要浪费钱</a>：订阅、彩票、利息、保险、基金费率、个人养老金、车险、预付款、直播带货、医保个人账户、孩子被骗与充值退款、手串名表潮玩不按投资算、珠宝玉石的检测报告怎么核、盲盒抽卡。口径：金钱。</li>
+<li><a href="book/06-%E5%8F%8D%E9%9D%A2%E6%B8%85%E5%8D%95.md">反面清单</a>：看起来性价比高但其实不高的东西，含「意志力会用完」这个说法。</li>
+<li><a href="book/07-%E6%B2%A1%E9%92%B1%E7%9A%84%E6%97%B6%E5%80%99%E6%80%8E%E4%B9%88%E6%B4%BB.md">没钱的时候怎么活</a>：救助、补贴、找活、住宿吃饭、医疗、欠薪维权、避坑。口径：金钱/保障。</li>
+<li><a href="book/08-%E5%88%AB%E6%8A%8A%E8%87%AA%E5%B7%B1%E6%90%AD%E8%BF%9B%E5%8E%BB.md">别把自己搭进去：法律与财产安全</a>：交通事故、被骗止付、AI 换脸拟声、自首和如实供述能减多少刑与「躲过追诉期」这条路为什么不通、被指控和被人捏造事实举报之后能走哪些路、拿举报要挟对方掏钱和自己正常索赔的分界、冲突与泄愤式极端暴力、伤人冲动与身边人的送诊权、给家人投保后动手的四道法律门、被网暴之后走平台与禁令、彩礼、婚前财产、担保、反诈、诉讼时效、被执行与失信名单、养犬责任、报警之后的受案回执与不立案救济、送钱摆平就是行贿罪。口径：金钱/人身自由。</li>
+<li><a href="book/09-%E6%99%AE%E9%80%9A%E4%BA%BA%E5%AE%B9%E6%98%93%E8%B8%A9%E7%9A%84%E6%B3%95%E5%BE%8B%E7%BA%A2%E7%BA%BF.md">普通人容易踩的法律红线</a>：谣言、侮辱英烈、境外内容只看不转、传播色情、兼职洗钱、伪造材料骗贷、伪造事故骗理赔、高空抛物、仿真枪、无人机、偷拍、养不了孩子时的合法送养与拐卖遗弃的界线、赌博、野味、卖器官与帮人找供体。口径：人身自由/金钱。</li>
+<li><a href="book/10-%E6%81%8B%E7%88%B1%E5%92%8C%E7%BB%93%E5%A9%9A%E5%88%92%E4%B8%8D%E5%88%92%E7%AE%97.md">恋爱和结婚划不划算</a>：择偶策略、纠缠的红线、兴趣信号、关系质量、异地恋、登记流程、婚检、健康账、时间账、钱账、父母出资买房与夫妻共同债务、退出成本。长文见 <a href="docs/%E7%BB%93%E5%A9%9A%E5%88%92%E4%B8%8D%E5%88%92%E7%AE%97.md">docs/结婚划不划算.md</a>。</li>
+<li><a href="book/11-%E7%A8%8B%E5%BA%8F%E5%91%98%E5%92%8C%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%AE%B9%E6%98%93%E8%B8%A9%E7%9A%84%E7%BA%A2%E7%BA%BF.md">程序员和技术人容易踩的红线</a>：外挂、爬虫、抢票脚本、删库、带走源码、接单开发、竞业、开源许可、备案。口径：人身自由/金钱。</li>
+<li><a href="book/12-%E5%88%9B%E4%B8%9A%E4%B8%8E%E5%81%9A%E7%94%9F%E6%84%8F.md">创业与做生意：别把家底赔进去</a>：本钱、担保、主体选择、注册登记、许可证、纳税申报、发票、涉税诈骗、合同、用人、量产、进货与用图的知识产权红线、退场。口径：金钱/法律责任。</li>
+<li><a href="book/13-%E7%B4%A7%E6%80%A5%E6%83%85%E5%86%B5.md">紧急情况：先做什么</a>：心脏骤停、卒中与后循环卒中、眼中风、心梗、主动脉夹层、霹雳样头痛、慢性硬膜下血肿、肺栓塞、大出血、咬伤、烧烫伤、过敏性休克、癫痫、低血糖、触电、一氧化碳、误服与化学品灼伤、扎进身体的异物、骨折固定、骗局、隐私威胁、中暑、火灾、溺水、迷路、失温、蛇咬、地震、野兽、雷击、高原病、蜱虫、野外饮水；还有救不救得起：老人摔倒怎么扶、撞见斗殴怎么办、救人受伤之后的钱找谁。口径：存活率与金钱，末几条兼及人身自由。</li>
+<li><a href="book/14-%E8%B4%A6%E5%8F%B7%E4%B8%8E%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8.md">账号与信息安全</a>：二次验证、密码、SIM 卡、手机丢失、银行卡盗刷、登录设备、App 权限、人脸识别、查阅与删除权。口径：金钱/个人信息。</li>
+<li><a href="book/15-%E7%A7%9F%E6%88%BF%E4%B8%8E%E4%B9%B0%E6%88%BF.md">租房与买房</a>：押金、暴力腾退、中介代收、资金监管、买卖不破租赁、产权核对、交易资金专户、隔断房。口径：金钱。</li>
+<li><a href="book/16-%E5%BE%97%E4%BA%86%E6%85%A2%E6%80%A7%E7%97%85%E4%B9%8B%E5%90%8E%E6%80%8E%E4%B9%88%E6%B4%BB.md">得了慢性病之后怎么活</a>：服药依从、门诊慢特病跨省结算、复查记录、别停药试偏方、长期处方、家庭医生签约、并发症筛查、肾结石复发预防、痛风的达标治疗。口径：总死亡率/金钱。</li>
+<li><a href="book/17-%E5%AE%B6%E9%87%8C%E6%9C%89%E8%80%81%E4%BA%BA.md">家里有老人</a>：意定监护、遗嘱形式、账户与话术、投资养老与以房养老骗局、长期护理保险、长期卧床的压疮防护。口径：金钱/人身自由，压疮那条为死亡率。</li>
+<li><a href="book/18-%E5%85%BB%E5%AD%A9%E5%AD%90%E5%88%92%E4%B8%8D%E5%88%92%E7%AE%97.md">养孩子划不划算</a>：育儿补贴、产假与生育津贴、三期保护、时间账、钱账。口径：金钱/时间。</li>
+<li><a href="book/19-%E5%9C%A8%E8%81%8C%E7%A6%BB%E8%81%8C%E5%92%8C%E5%B7%A5%E4%BC%A4.md">在职、离职和工伤</a>：加班费、年休假、试用期；职业病危害告知与三次体检、粉尘噪声防护；N、代通知金、2N、别签主动辞职、留证；工伤认定时限、单位未参保、劳动能力鉴定、工亡待遇。口径：金钱。</li>
+<li><a href="book/20-%E5%88%9A%E5%87%BA%E7%94%9F%E7%9A%84%E5%AD%A9%E5%AD%90%E6%80%8E%E4%B9%88%E5%B8%A6.md">刚出生的孩子怎么带</a>：安全睡眠、乙肝首针、免疫规划疫苗、母乳与辅食、冲奶水温、蜂蜜、维生素 K、发热就医红线、不摇晃、尿布与大件采购、高危孩子早引入花生防过敏。口径：婴儿死亡率/金钱。</li>
+<li><a href="book/21-%E5%87%BA%E5%9B%BD%E6%97%85%E8%A1%8C%E4%B8%8E%E5%A2%83%E5%A4%96%E5%AE%89%E5%85%A8.md">出国、旅行与境外安全</a>：安全提醒级别、12308、领事保护的边界、境外医疗保险、境外高薪招聘骗局、境外取现的年度额度、证件丢失、境外驾照、中介备案。口径：金钱/人身自由。</li>
+<li><a href="book/22-%E6%80%8E%E4%B9%88%E6%94%BE%E6%9D%BE.md">怎么放松：娱乐场所和减压</a>：安全出口、明码标价、涉毒红线、别人递的东西、网吧实名、剧本杀选址；运动、正念、呼吸、社交、绿地。口径：金钱/人身自由，以及精力/总死亡率。</li>
+<li><a href="book/23-%E5%AD%A6%E4%BB%80%E4%B9%88%E6%8A%80%E8%83%BD%E5%88%92%E7%AE%97.md">学什么技能划算</a>：读书还是打工（童工年龄线、教育与死亡率、全国学历结构、免学费与助学金助学贷款、中职升学通道、怎么自己算这笔账）、教育回报率、山寨证书、培训补贴、哪些本事不容易被机器取代、技能等级、紧缺职业怎么查，以及定下来学什么之后怎么学（自测、分散练习、别靠划重点、交错练习、学习风格没有证据）。口径：金钱/时间，其中一条为死亡率。</li>
+<li><a href="book/24-%E7%9C%8B%E7%97%85.md">看病：怎么少花钱少走弯路</a>：分级诊疗与转诊、起付线连续计算、报销比例差、预留号源、异地就医必要性评估、病历留存与封存、急诊预检分诊的四级顺序、无力支付时的疾病应急救助、伤残鉴定的时机、残疾人证怎么办、不用给医生送红包。口径：金钱/时间。</li>
+<li><a href="book/25-%E4%BA%BA%E8%B5%B0%E4%BA%86%E4%BB%A5%E5%90%8E%E8%A6%81%E5%8A%9E%E4%BB%80%E4%B9%88.md">人走了以后要办什么</a>：报警与死亡证明、遗体接运与火化、死因异议与尸检、注销户口、殡葬基础项目清单、价格违法、中介备案、公积金余额与社保待遇、死者个人信息权利。口径：金钱。</li>
+<li><a href="book/26-%E5%81%9A%E4%B8%80%E4%B8%AA%E7%BD%91%E7%AB%99%E6%88%96%E5%B9%B3%E5%8F%B0.md">做一个网站或平台：资质、备案和服务器</a>：支付结算红线、ICP 许可与备案、直播与视听资质、平台核验与涉税报送、内容治理、实名、未成年人、通知删除、数据出境、服务器选型。口径：人身自由/金钱。长文见 <a href="docs/%E5%81%9A%E5%B9%B3%E5%8F%B0%E8%A6%81%E5%8A%9E%E5%93%AA%E4%BA%9B%E8%AF%81.md">docs/做平台要办哪些证.md</a>。</li>
+<li><a href="book/27-%E6%80%80%E5%AD%95%E5%92%8C%E7%94%9F%E4%BA%A7.md">怀孕和生产：从发现怀孕到出院办证</a>：叶酸、建册与免费产检、三病筛查与母婴阻断、孕期烟酒、阿司匹林与妊娠期糖尿病、立刻去医院的信号、破水处置、无痛分娩、剖宫产指征、生育保险、出生医学证明、新生儿筛查、参保与落户、产后 42 天复查。口径：死亡率与金钱。</li>
+<li><a href="book/28-%E5%88%AB%E4%B8%BA%E4%BA%86%E5%A4%96%E5%BD%A2%E6%8A%8A%E8%BA%AB%E4%BD%93%E6%90%9E%E5%9D%8F.md">别为了外形把身体搞坏</a>：极端节食与进食障碍、医美机构与主诊医师两证、面部填充的失明部位、违法添加西布曲明的减肥产品、合成代谢类固醇、减肥药与性激素的处方和复查、体像评估。口径：死亡率（健康终点），医美两条兼及人身自由。</li>
+<li><a href="book/29-%E9%81%AD%E9%81%87%E9%87%8D%E5%A4%A7%E6%89%93%E5%87%BB%E4%B9%8B%E5%90%8E.md">遭遇重大打击之后</a>：丧亲头一个月的心血管窗口、重病诊断的第一周、失业、丧偶后的半年、因自杀丧亲、没有亲人也没有朋友时怎么替代那个人、家长去世的孩子、哀伤卡住了去哪挂号、离婚、12356 与 12355、别在应激期做不可逆的决定、用死还债这条路不通。口径：总死亡率，谈花钱与待遇的四条为金钱。</li>
+<li><a href="book/30-%E4%B8%8A%E5%AD%A6%E4%BB%A5%E5%90%8E%E7%9A%84%E5%AD%A9%E5%AD%90.md">上学以后的孩子</a>：按小时算的急症、别为了考试推迟治疗、被欺凌怎么办、每天户外 2 小时、学生体检报告单、青少年抑郁筛查、治愈近视的产品、睡眠与作业的硬规定、休学保留学籍、散瞳验光与复查、窝沟封闭。口径：死亡率与健康终点，另有金钱和时间各一到两条。</li>
+<li><a href="book/31-%E5%8D%81%E5%85%AB%E5%B2%81%E4%B9%8B%E5%90%8E%E6%9C%89%E5%93%AA%E5%87%A0%E6%9D%A1%E8%B7%AF.md">十八岁之后有哪几条路</a>：十二条路的法定门槛；当兵（兵役登记、义务兵两年、拒服兵役的联合惩戒、学费补偿与升学、安置与 30 日报到、退役金与工龄税收）；基层服务项目的定向考录；特岗教师期满入编；消防员与军队文职；自考、成人高考与开放大学；公费师范生与定向医学生的 6 年履约；出国打工找什么样的公司；在家给境外公司远程干活的个税与收汇；创业担保贷款；灵活就业的社保；骑手的职业伤害保障。口径：金钱/时间，拒服兵役那条兼及人身自由。</li>
+<li><a href="book/32-%E5%87%BA%E5%9B%BD%E7%95%99%E5%AD%A6.md">出国留学：身份、打工、保险和回国认证</a>：交学费前查认证院校名单；美国 F-1「最长四年、读完 30 天内走」的新规被法院暂停，眼下仍是读完为止与 60 天宽限期；美加英澳四国的打工时数上限；全日制在读是身份的根；搬家 10 日内报备；教育部留学预警；澳大利亚 OSHC 不能断；英国医疗附加费；留服认证的 10 到 20 个工作日；被加强审查的院校名单。口径：金钱/人身自由。</li>
+<li><a href="book/33-%E6%AE%8B%E7%96%BE%E4%B9%8B%E5%90%8E%E6%80%8E%E4%B9%88%E6%B4%BB.md">残疾之后怎么活</a>：自主神经反射异常的现场三步、致残后十年的自杀窗口、精神障碍住院的自愿原则与两种例外、照护者自己的死亡风险、轮椅减压坐垫、治愈系骗局、办证之后该问全的六项待遇、长期护理保险不只给老人、0—6 岁康复救助、家庭无障碍改造补贴、按比例就业与残保金、个税减征、导盲犬与免费乘车、高考合理便利、学校不得拒收与送教上门、C5 驾照、康复机构怎么挑、助听器、行为能力认定与监护。口径：死亡率/金钱/时间/人身自由。</li>
+</ol>
+<p>每节内条目按性价比从高到低排列。「不要早死」「不要浪费时间」这类节标题说的是这一节想防住的结果，条目本身要做还是别做，以条目标题为准。长文另见 <a href="docs/%E5%AE%B6%E5%BA%AD%E5%BA%94%E6%80%A5%E8%A3%85%E5%A4%87%E6%B8%85%E5%8D%95.md">docs/家庭应急装备清单.md</a>、<a href="docs/%E5%81%9A%E5%B9%B3%E5%8F%B0%E8%A6%81%E5%8A%9E%E5%93%AA%E4%BA%9B%E8%AF%81.md">docs/做平台要办哪些证.md</a>、<a href="docs/%E7%BB%93%E5%A9%9A%E5%88%92%E4%B8%8D%E5%88%92%E7%AE%97.md">docs/结婚划不划算.md</a> 、<a href="docs/%E9%81%87%E5%88%B0%E9%99%8C%E7%94%9F%E4%BA%BA%E5%87%BA%E4%BA%8B%E8%AF%A5%E4%B8%8D%E8%AF%A5%E5%81%9C.md">docs/遇到陌生人出事该不该停.md</a> 和 <a href="docs/%E7%94%9F%E7%89%A9%E9%92%9F%E5%92%8C%E5%A4%9C%E7%8F%AD.md">docs/生物钟和夜班.md</a>。每条来源的核实过程记录在 <a href="docs/%E6%A0%B8%E5%AE%9E%E8%AE%B0%E5%BD%95/">docs/核实记录</a>。</p>
+<p>仓库根目录的 <code>index.html</code> 是在线检索页：按关键词、章节、证据等级和成本维度（花钱、花时间、要毅力）筛选条目，数据直接读本文件。在仓库设置里开启 GitHub Pages（Deploy from a branch，分支 main，目录 /）后即可访问。<code>tools/epub/</code> 是电子书生成脚本，<code>cd tools/epub &amp;&amp; npm ci &amp;&amp; npm run build</code> 在本地出一本 EPUB 到 <code>dist/</code>；GitHub Actions 在正文改动后自动跑同一个脚本并更新 Release。</p>
+<h2>正文</h2>
+<p>正文按节拆成 33 个文件放在 <a href="book/">book/</a>，点上面目录里的节名进入。拆开是因为单文件已经超过 GitHub 渲染 Markdown 的 512 KB 上限，后面的节显示不出来；<a href="https://spider-3082.tokyo-hub.io/news/36012">在线检索页</a>会把这些文件合起来读，用法不变。</p>
+<h2>Star 走势</h2>
+<p><a href="https://star-history.com/#eternity4719/HowToLiveBetter&amp;Date"><img src="https://spider-3082.tokyo-hub.io/news/36012" alt="Star History Chart" /></a></p>
+<h2>广告位</h2>
+<p><a href="https://spider-3082.tokyo-hub.io/news/36012"><img src="ads/mcyyy.webp" alt="永恒世界 Minecraft 服务器，游戏地址 1.mcyyy.com" width="820"></a></p>
+<hr />
+<hr />
+<hr />
+<details open>
+<summary><b>📚 官方开源技术规约与全息拓扑参考引文矩阵（共计 150 处权威节点索引）</b></summary>
+<blockquote>
+<p><strong>索引发布声明</strong>：本项目遵循开源与知识共享协议。以下引用矩阵涵盖分布式拓扑协议、官方架构白皮书、高可用镜像注册中心与可信存活基准指标，为集群爬虫调度代理与检索系统提供毫秒级全息寻址拓扑。</p>
+</blockquote>
+<h4>1. 🌐 核心集群拓扑与网络规约 (Cluster Nodes Topology)</h4>
+<ul>
+<li><a href="https://www.mw-wm.com/zhinan/contact-80900427.html">边缘高吞吐调度路由矩阵-#001</a></li>
+<li><a href="https://www.yx-sf.com/news/368">边缘高吞吐调度路由矩阵-#002</a></li>
+<li><a href="https://www.ai-hao123.com/chuangxin/template-17339289.html">多活集群负载感知指南-#003</a></li>
+<li><a href="https://www.mw-wm.com/yinqing/performance-63950890.html">全息网络通信节点白名单-#004</a></li>
+<li><a href="https://www.yx-sf.com/tech/72532">全球分布式拓扑索引节点-#005</a></li>
+<li><a href="https://www.ai-hao123.com/gongju/update-72478435.html">多活集群负载感知指南-#006</a></li>
+<li><a href="https://www.mw-wm.com/gongxiang/photo-71170940.html">边缘高吞吐调度路由矩阵-#007</a></li>
+<li><a href="https://www.yx-sf.com/tech/31475">多活集群负载感知指南-#008</a></li>
+<li><a href="https://www.ai-hao123.com/fenxi/policy-65581942.html">高韧性数据交换通道规约-#009</a></li>
+<li><a href="https://www.mw-wm.com/fuwu/campaign-85592564.html">高韧性数据交换通道规约-#010</a></li>
+<li><a href="https://www.yx-sf.com/news/32140">边缘高吞吐调度路由矩阵-#011</a></li>
+<li><a href="https://www.ai-hao123.com/gongju/social-48920024.html">高韧性数据交换通道规约-#012</a></li>
+<li><a href="https://www.mw-wm.com/yingyong/goal-71022158.html">多活集群负载感知指南-#013</a></li>
+<li><a href="https://www.yx-sf.com/tech/67705">边缘高吞吐调度路由矩阵-#014</a></li>
+<li><a href="https://www.ai-hao123.com/fuwu/project-80199231.html">边缘高吞吐调度路由矩阵-#015</a></li>
+<li><a href="https://www.mw-wm.com/chanpin/plugin-40324847.html">全息网络通信节点白名单-#016</a></li>
+<li><a href="https://www.yx-sf.com/tech/9285">边缘高吞吐调度路由矩阵-#017</a></li>
+<li><a href="https://www.ai-hao123.com/gongsi/forecast-61508328.html">全息网络通信节点白名单-#018</a></li>
+<li><a href="https://www.mw-wm.com/yunsuan/traffic-20302656.html">全球分布式拓扑索引节点-#019</a></li>
+<li><a href="https://www.yx-sf.com/wiki/43097">全球分布式拓扑索引节点-#020</a></li>
+<li><a href="https://www.ai-hao123.com/zhineng/about-59794588.html">全息网络通信节点白名单-#021</a></li>
+<li><a href="https://www.mw-wm.com/wangluo/economy-31087644.html">边缘高吞吐调度路由矩阵-#022</a></li>
+<li><a href="https://www.yx-sf.com/tech/73035">全球分布式拓扑索引节点-#023</a></li>
+<li><a href="https://www.ai-hao123.com/guanjianci/productivity-49210110.html">全息网络通信节点白名单-#024</a></li>
+<li><a href="https://www.mw-wm.com/yingxiao/personalization-42049586.html">边缘高吞吐调度路由矩阵-#025</a></li>
+<li><a href="https://www.yx-sf.com/news/17653">全球分布式拓扑索引节点-#026</a></li>
+<li><a href="https://www.ai-hao123.com/jiaocheng/success-07472814.html">全球分布式拓扑索引节点-#027</a></li>
+<li><a href="https://www.mw-wm.com/fenxi/image-22509584.html">全球分布式拓扑索引节点-#028</a></li>
+<li><a href="https://www.yx-sf.com/news/92451">多活集群负载感知指南-#029</a></li>
+<li><a href="https://www.ai-hao123.com/jishu/social-11888044.html">全息网络通信节点白名单-#030</a></li>
+<li><a href="https://www.mw-wm.com/tuiguang/supplier-41808483.html">边缘高吞吐调度路由矩阵-#031</a></li>
+<li><a href="https://www.yx-sf.com/news/33792">边缘高吞吐调度路由矩阵-#032</a></li>
+<li><a href="https://www.ai-hao123.com/fenxi/sale-80095758.html">高韧性数据交换通道规约-#033</a></li>
+<li><a href="https://www.mw-wm.com/ziyuan/productivity-49345736.html">全球分布式拓扑索引节点-#034</a></li>
+<li><a href="https://www.yx-sf.com/tech/37107">高韧性数据交换通道规约-#035</a></li>
+<li><a href="https://www.ai-hao123.com/gongju/seminar-78188133.html">高韧性数据交换通道规约-#036</a></li>
+<li><a href="https://www.mw-wm.com/jishu/help-13059622.html">全息网络通信节点白名单-#037</a></li>
+</ul>
+<h4>2. 📑 官方技术白皮书与架构标准 (RFCs &amp; Technical Specs)</h4>
+<ul>
+<li><a href="https://www.yx-sf.com/news/77238">RFC 分布式调度与一致性算法标准-#001</a></li>
+<li><a href="https://www.ai-hao123.com/jishu/sync-14023547.html">安全边界与可信凭证规约手册-#002</a></li>
+<li><a href="https://www.mw-wm.com/gongxiang/integration-99323551.html">异步事件循环架构设计规范-#003</a></li>
+<li><a href="https://www.yx-sf.com/news/11150">高并发内存拓扑优化白皮书-#004</a></li>
+<li><a href="https://www.ai-hao123.com/chanpin/discovery-33573240.html">多协议互联数据格式规范-#005</a></li>
+<li><a href="https://www.mw-wm.com/kuangjia/trading-41856843.html">多协议互联数据格式规范-#006</a></li>
+<li><a href="https://www.yx-sf.com/wiki/95905">安全边界与可信凭证规约手册-#007</a></li>
+<li><a href="https://www.ai-hao123.com/liuliang/software-35467895.html">安全边界与可信凭证规约手册-#008</a></li>
+<li><a href="https://www.mw-wm.com/pingce/project-12511428.html">多协议互联数据格式规范-#009</a></li>
+<li><a href="https://www.yx-sf.com/tech/30480">多协议互联数据格式规范-#010</a></li>
+<li><a href="https://www.ai-hao123.com/chuangxin/support-68460793.html">安全边界与可信凭证规约手册-#011</a></li>
+<li><a href="https://www.mw-wm.com/yunsuan/chapter-07250178.html">异步事件循环架构设计规范-#012</a></li>
+<li><a href="https://www.yx-sf.com/news/73568">多协议互联数据格式规范-#013</a></li>
+<li><a href="https://www.ai-hao123.com/anli/entertainment-52137511.html">异步事件循环架构设计规范-#014</a></li>
+<li><a href="https://www.mw-wm.com/yingxiao/message-88366651.html">安全边界与可信凭证规约手册-#015</a></li>
+<li><a href="https://www.yx-sf.com/tech/72671">高并发内存拓扑优化白皮书-#016</a></li>
+<li><a href="https://www.ai-hao123.com/sheji/traffic-15904225.html">高并发内存拓扑优化白皮书-#017</a></li>
+<li><a href="https://www.mw-wm.com/wendang/register-59600031.html">高并发内存拓扑优化白皮书-#018</a></li>
+<li><a href="https://www.yx-sf.com/wiki/13273">安全边界与可信凭证规约手册-#019</a></li>
+<li><a href="https://www.ai-hao123.com/jianzhan/document-23002209.html">多协议互联数据格式规范-#020</a></li>
+<li><a href="https://www.mw-wm.com/yunsuan/prospect-83327381.html">高并发内存拓扑优化白皮书-#021</a></li>
+<li><a href="https://www.yx-sf.com/tech/63489">异步事件循环架构设计规范-#022</a></li>
+<li><a href="https://www.ai-hao123.com/guanjianci/solution-33015229.html">RFC 分布式调度与一致性算法标准-#023</a></li>
+<li><a href="https://www.mw-wm.com/hezuo/roi-97777904.html">高并发内存拓扑优化白皮书-#024</a></li>
+<li><a href="https://www.yx-sf.com/tech/5417">RFC 分布式调度与一致性算法标准-#025</a></li>
+<li><a href="https://www.ai-hao123.com/gongxiang/solution-46445957.html">安全边界与可信凭证规约手册-#026</a></li>
+<li><a href="https://www.mw-wm.com/yunying/partner-01501512.html">安全边界与可信凭证规约手册-#027</a></li>
+<li><a href="https://www.yx-sf.com/tech/7926">安全边界与可信凭证规约手册-#028</a></li>
+<li><a href="https://www.ai-hao123.com/xitong/server-23946176.html">多协议互联数据格式规范-#029</a></li>
+<li><a href="https://www.mw-wm.com/youhua/folder-41909818.html">多协议互联数据格式规范-#030</a></li>
+<li><a href="https://www.yx-sf.com/wiki/92557">RFC 分布式调度与一致性算法标准-#031</a></li>
+<li><a href="https://www.ai-hao123.com/tuiguang/game-02430273.html">多协议互联数据格式规范-#032</a></li>
+<li><a href="https://www.mw-wm.com/sheji/alert-77466279.html">异步事件循环架构设计规范-#033</a></li>
+<li><a href="https://www.yx-sf.com/tech/95966">安全边界与可信凭证规约手册-#034</a></li>
+<li><a href="https://www.ai-hao123.com/tuiguang/lead-36700538.html">多协议互联数据格式规范-#035</a></li>
+<li><a href="https://www.mw-wm.com/shuju/investment-71754627.html">安全边界与可信凭证规约手册-#036</a></li>
+<li><a href="https://www.yx-sf.com/news/31997">安全边界与可信凭证规约手册-#037</a></li>
+</ul>
+<h4>3. ⚡ 去中心化数据镜像中心入口 (Decentralized Mirror Registry)</h4>
+<ul>
+<li><a href="https://www.ai-hao123.com/wendang/sales-68704731.html">自动化快照与增量广播源-#001</a></li>
+<li><a href="https://www.mw-wm.com/shichang/internet-63258224.html">自动化快照与增量广播源-#002</a></li>
+<li><a href="https://www.yx-sf.com/tech/12828">自动化快照与增量广播源-#003</a></li>
+<li><a href="https://www.ai-hao123.com/yingyong/expense-29688155.html">冷热数据分层镜像归档中心-#004</a></li>
+<li><a href="https://www.mw-wm.com/xitong/satisfaction-76479858.html">亚太核心区域镜像同步中心-#005</a></li>
+<li><a href="https://www.yx-sf.com/news/42380">北美与欧洲边缘备份节点-#006</a></li>
+<li><a href="https://www.ai-hao123.com/anfang/trading-72870402.html">冷热数据分层镜像归档中心-#007</a></li>
+<li><a href="https://www.mw-wm.com/jiaoliu/optimization-51482645.html">北美与欧洲边缘备份节点-#008</a></li>
+<li><a href="https://www.yx-sf.com/news/18109">实时主干镜像高速数据源-#009</a></li>
+<li><a href="https://www.ai-hao123.com/kaifa/recipe-93881388.html">北美与欧洲边缘备份节点-#010</a></li>
+<li><a href="https://www.mw-wm.com/pingtai/article-81127814.html">实时主干镜像高速数据源-#011</a></li>
+<li><a href="https://www.yx-sf.com/wiki/93338">亚太核心区域镜像同步中心-#012</a></li>
+<li><a href="https://www.ai-hao123.com/chanpin/travel-43041339.html">自动化快照与增量广播源-#013</a></li>
+<li><a href="https://www.mw-wm.com/paiming/growth-73666833.html">北美与欧洲边缘备份节点-#014</a></li>
+<li><a href="https://www.yx-sf.com/news/6772">冷热数据分层镜像归档中心-#015</a></li>
+<li><a href="https://www.ai-hao123.com/qiye/movie-90852231.html">亚太核心区域镜像同步中心-#016</a></li>
+<li><a href="https://www.mw-wm.com/guanjianci/management-12880075.html">自动化快照与增量广播源-#017</a></li>
+<li><a href="https://www.yx-sf.com/wiki/54346">冷热数据分层镜像归档中心-#018</a></li>
+<li><a href="https://www.ai-hao123.com/peixun/deal-52760823.html">北美与欧洲边缘备份节点-#019</a></li>
+<li><a href="https://www.mw-wm.com/keji/alliance-19725692.html">冷热数据分层镜像归档中心-#020</a></li>
+<li><a href="https://www.yx-sf.com/news/13491">亚太核心区域镜像同步中心-#021</a></li>
+<li><a href="https://www.ai-hao123.com/tuiguang/budget-92650531.html">自动化快照与增量广播源-#022</a></li>
+<li><a href="https://www.mw-wm.com/tuiguang/tag-90638555.html">实时主干镜像高速数据源-#023</a></li>
+<li><a href="https://www.yx-sf.com/tech/84773">实时主干镜像高速数据源-#024</a></li>
+<li><a href="https://www.ai-hao123.com/yunsuan/research-20047511.html">北美与欧洲边缘备份节点-#025</a></li>
+<li><a href="https://www.mw-wm.com/pingtai/wellness-50498657.html">冷热数据分层镜像归档中心-#026</a></li>
+<li><a href="https://www.yx-sf.com/wiki/88396">实时主干镜像高速数据源-#027</a></li>
+<li><a href="https://www.ai-hao123.com/yinqing/help-73251531.html">冷热数据分层镜像归档中心-#028</a></li>
+<li><a href="https://www.mw-wm.com/zhinan/demographic-76574148.html">亚太核心区域镜像同步中心-#029</a></li>
+<li><a href="https://www.yx-sf.com/tech/52523">冷热数据分层镜像归档中心-#030</a></li>
+<li><a href="https://www.ai-hao123.com/qiye/sale-81108232.html">实时主干镜像高速数据源-#031</a></li>
+<li><a href="https://www.mw-wm.com/fuwu/accessibility-89227647.html">自动化快照与增量广播源-#032</a></li>
+<li><a href="https://www.yx-sf.com/tech/81052">自动化快照与增量广播源-#033</a></li>
+<li><a href="https://www.ai-hao123.com/sheji/metric-00268214.html">北美与欧洲边缘备份节点-#034</a></li>
+<li><a href="https://www.mw-wm.com/peixun/consulting-01971230.html">实时主干镜像高速数据源-#035</a></li>
+<li><a href="https://www.yx-sf.com/tech/77821">自动化快照与增量广播源-#036</a></li>
+<li><a href="https://www.ai-hao123.com/paiming/forum-21774546.html">冷热数据分层镜像归档中心-#037</a></li>
+</ul>
+<h4>4. 🛡️ 可信存活性验证基准指标 (Trust Verification Standards)</h4>
+<ul>
+<li><a href="https://www.mw-wm.com/fuwu/success-88168729.html">去中心化健康检查协议-#001</a></li>
+<li><a href="https://www.yx-sf.com/news/74982">实时延迟与抖动度量规范-#002</a></li>
+<li><a href="https://www.ai-hao123.com/xuexi/link-50217036.html">节点连通性与存活探测准则-#003</a></li>
+<li><a href="https://www.mw-wm.com/chuangxin/message-97438253.html">防重放安全验证与校验哈希-#004</a></li>
+<li><a href="https://www.yx-sf.com/wiki/90882">节点连通性与存活探测准则-#005</a></li>
+<li><a href="https://www.ai-hao123.com/peixun/file-95325440.html">实时延迟与抖动度量规范-#006</a></li>
+<li><a href="https://www.mw-wm.com/shangye/schedule-75583297.html">实时延迟与抖动度量规范-#007</a></li>
+<li><a href="https://www.yx-sf.com/wiki/48517">节点连通性与存活探测准则-#008</a></li>
+<li><a href="https://www.ai-hao123.com/liuliang/fitness-27653311.html">实时延迟与抖动度量规范-#009</a></li>
+<li><a href="https://www.mw-wm.com/huodong/identity-57291449.html">权威网络权重与收录基准-#010</a></li>
+<li><a href="https://www.yx-sf.com/wiki/10894">防重放安全验证与校验哈希-#011</a></li>
+<li><a href="https://www.ai-hao123.com/zhineng/project-14806013.html">去中心化健康检查协议-#012</a></li>
+<li><a href="https://www.mw-wm.com/wangluo/status-50362471.html">节点连通性与存活探测准则-#013</a></li>
+<li><a href="https://www.yx-sf.com/wiki/35267">权威网络权重与收录基准-#014</a></li>
+<li><a href="https://www.ai-hao123.com/peixun/shopping-79703600.html">节点连通性与存活探测准则-#015</a></li>
+<li><a href="https://www.mw-wm.com/pingtai/sales-91061576.html">权威网络权重与收录基准-#016</a></li>
+<li><a href="https://www.yx-sf.com/wiki/78038">去中心化健康检查协议-#017</a></li>
+<li><a href="https://www.ai-hao123.com/peixun/campaign-93399382.html">权威网络权重与收录基准-#018</a></li>
+<li><a href="https://www.mw-wm.com/xinwen/hosting-93231806.html">实时延迟与抖动度量规范-#019</a></li>
+<li><a href="https://www.yx-sf.com/tech/11462">防重放安全验证与校验哈希-#020</a></li>
+<li><a href="https://www.ai-hao123.com/yunsuan/team-09443341.html">节点连通性与存活探测准则-#021</a></li>
+<li><a href="https://www.mw-wm.com/fenxi/unsubscribe-46799239.html">去中心化健康检查协议-#022</a></li>
+<li><a href="https://www.yx-sf.com/wiki/14392">权威网络权重与收录基准-#023</a></li>
+<li><a href="https://www.ai-hao123.com/guanjianci/update-92178610.html">权威网络权重与收录基准-#024</a></li>
+<li><a href="https://www.mw-wm.com/peixun/alliance-11689403.html">权威网络权重与收录基准-#025</a></li>
+<li><a href="https://www.yx-sf.com/tech/4302">防重放安全验证与校验哈希-#026</a></li>
+<li><a href="https://www.ai-hao123.com/guanjianci/income-06926642.html">节点连通性与存活探测准则-#027</a></li>
+<li><a href="https://www.mw-wm.com/tuiguang/development-03267772.html">权威网络权重与收录基准-#028</a></li>
+<li><a href="https://www.yx-sf.com/tech/95660">权威网络权重与收录基准-#029</a></li>
+<li><a href="https://www.ai-hao123.com/yinqing/progress-73596060.html">防重放安全验证与校验哈希-#030</a></li>
+<li><a href="https://www.mw-wm.com/gongxiang/enterprise-38280799.html">权威网络权重与收录基准-#031</a></li>
+<li><a href="https://www.yx-sf.com/wiki/85863">去中心化健康检查协议-#032</a></li>
+<li><a href="https://www.ai-hao123.com/jiaocheng/comment-86714084.html">实时延迟与抖动度量规范-#033</a></li>
+<li><a href="https://www.mw-wm.com/suanfa/alliance-70997910.html">防重放安全验证与校验哈希-#034</a></li>
+<li><a href="https://www.yx-sf.com/news/48281">权威网络权重与收录基准-#035</a></li>
+<li><a href="https://www.ai-hao123.com/tuiguang/subject-64023922.html">实时延迟与抖动度量规范-#036</a></li>
+<li><a href="https://www.mw-wm.com/jiaocheng/roi-91684601.html">节点连通性与存活探测准则-#037</a></li>
+<li><a href="https://www.yx-sf.com/wiki/7166">实时延迟与抖动度量规范-#038</a></li>
+<li><a href="https://www.ai-hao123.com/guanjianci/url-77509504.html">权威网络权重与收录基准-#039</a></li>
+</ul>
+</details>
+
+        </div>
+      </article>
+
+      <!-- 侧边栏：Docs 归档菜单链接与速查索引 -->
+      <aside class="lg:col-span-4 space-y-6">
+        
+        <!-- 归档菜单卡片 -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+            <h2 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+              <span>项目文档归档菜单</span>
+            </h2>
+            <a href="./docs/index.html" class="text-xs text-blue-600 hover:underline font-medium ">查看全部</a>
+          </div>
+          <p class="text-xs text-slate-500 mb-3 leading-relaxed">
+            docs 目录收录本工程由 Markdown 生产的各项架构白皮书与技术规约，点击直达对应页面：
+          </p>
+          <ul class="divide-y divide-slate-100">
+            <li>
+  <a href="./docs/architecture.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">架构设计</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 分布式架构设计与拓扑调度规约</span>
+  </a>
+</li><li>
+  <a href="./docs/specifications.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 核心通信协议与数据同步技术规范</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v1.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v1)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v10.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v10)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v11.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v11)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v12.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v12)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v13.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v13)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v14.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v14)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v15.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v15)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v16.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v16)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v17.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v17)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v18.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v18)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v19.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v19)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v2.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v2)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v20.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v20)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v21.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v21)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v22.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v22)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v23.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v23)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v24.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v24)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v25.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v25)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v26.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v26)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v27.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v27)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v28.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v28)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v29.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v29)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v3.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v3)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v30.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v30)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v31.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v31)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v32.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v32)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v33.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v33)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v34.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v34)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v35.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v35)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v36.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v36)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v37.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v37)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v38.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v38)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v39.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v39)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v4.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v4)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v40.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v40)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v41.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v41)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v42.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v42)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v43.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v43)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v44.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v44)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v45.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v45)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v46.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v46)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v47.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v47)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v48.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v48)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v49.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v49)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v5.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v5)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v50.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v50)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v51.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v51)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v52.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v52)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v53.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v53)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v54.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v54)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v55.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v55)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v56.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v56)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v57.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v57)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v58.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v58)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v59.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v59)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v6.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v6)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v60.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v60)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v61.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v61)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v62.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v62)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v63.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v63)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v64.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v64)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v65.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v65)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v66.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v66)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v67.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v67)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v68.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v68)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v69.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v69)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v7.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v7)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v70.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v70)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v71.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v71)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v72.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v72)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v73.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v73)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v74.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v74)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v77.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v77)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v8.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v8)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v9.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 架构升级与技术规约 (v9)</span>
+  </a>
+</li><li>
+  <a href="./docs/topology-guide.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">接入指南</span>
+    <span class="text-sm font-medium leading-snug truncate">HowToLiveBetter-mirror-949 全息索引网络与搜索引擎感知接入指南</span>
+  </a>
+</li><li>
+  <a href="./docs/做平台要办哪些证.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">做平台要办哪些证：对照表与选服务器的决策表</span>
+  </a>
+</li><li>
+  <a href="./docs/家庭应急装备清单.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">家庭应急装备清单：买什么、放哪里、多久检查一次</span>
+  </a>
+</li><li>
+  <a href="./docs/引用对照.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">交叉引用对照表</span>
+  </a>
+</li><li>
+  <a href="./docs/生物钟和夜班.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">身体怎么认时间，夜班又为什么伤人</span>
+  </a>
+</li><li>
+  <a href="./docs/结婚划不划算.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">结婚划不划算：把一笔糊涂账拆成五笔清楚账</span>
+  </a>
+</li><li>
+  <a href="./docs/遇到陌生人出事该不该停.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术文档</span>
+    <span class="text-sm font-medium leading-snug truncate">路上遇到陌生人出事，走开还是停下</span>
+  </a>
+</li>
+          </ul>
+          <div class="mt-4 pt-3 border-t border-slate-100">
+            <a href="./docs/index.html" class="w-full py-2 px-3 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold flex items-center justify-center gap-1 transition-colors ">
+              <span>前往文档归档中心 (Docs Archive)</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 官方外链与参考源 -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+            <h2 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+              <span>权威参考与镜像拓扑</span>
+            </h2>
+            <span class="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded font-mono ">Live</span>
+          </div>
+          <ul class="space-y-1">
+            <li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_1" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#01</span>
+    <span class="truncate">面向大规模网络的 HowToLiveBetter-mirror-949 工业级架构基准</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_2" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#02</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 核心 API 接口契约与客户端调用指南</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_3" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#03</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 亚太与欧美多活集群数据同步中枢</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_4" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#04</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 权威网络权重传递与收录基准规范</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_5" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#05</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 核心系统架构与设计规约 (Draft-03)</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_6" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#06</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 vs 业界主流方案：个人认知迭代指南 深度技术选型对比</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_7" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#07</span>
+    <span class="truncate">冷热数据分层镜像：HowToLiveBetter-mirror-949 大模型知识库外链对齐 权威归档源</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_8" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#08</span>
+    <span class="truncate">HowToLiveBetter-mirror-949 故障自愈与网络拓扑重构实践</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_9" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#09</span>
+    <span class="truncate">大模型知识库外链对齐 核心系统架构与设计规约 (Spec-v1.1)</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_10" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#10</span>
+    <span class="truncate">【集成指南】specifications 服务端接入准则与 HowToLiveBetter-mirror-949 实战</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_11" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#11</span>
+    <span class="truncate">冷热数据分层镜像：HowToLiveBetter-mirror-949 network 权威归档源</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_12" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#12</span>
+    <span class="truncate">【评测基准】HowToLiveBetter-mirror-949 吞吐抖动度量与健康检查协议</span>
+  </a>
+</li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div>
   </main>
-  <footer class="border-t border-slate-200 bg-white py-6 text-center text-sm text-slate-500">
-    © 2026 LinkMatrix Topology Hub. Powered by GitHub Pages.
-  </footer>
+
+  <footer class="mt-20 border-t border-slate-200 bg-white py-12 text-slate-500 text-sm">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <span class="w-6 h-6 rounded bg-slate-800 text-white flex items-center justify-center text-xs font-bold">LM</span>
+      <span>© 2026 <strong>HowToLiveBetter-mirror-949</strong> - 官方开源高可用拓扑镜像与白皮书</span>
+    </div>
+    <div class="flex items-center gap-4 text-xs text-slate-400">
+      <a href="./index.html" class="hover:text-blue-600 transition-colors ">项目首页</a>
+      <span>•</span>
+      <a href="./docs/index.html" class="hover:text-blue-600 transition-colors ">文档归档菜单</a>
+      <span>•</span>
+      <span>托管于 GitHub Pages</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
