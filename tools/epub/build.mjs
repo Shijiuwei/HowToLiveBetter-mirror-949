@@ -2,12 +2,15 @@
 // 用法：node tools/epub/build.mjs [输出路径]   默认输出 dist/HowToLiveBetter.epub
 // 只依赖 marked；zip 自己写（EPUB 要求 mimetype 第一个且不压缩，通用 zip 库不一定保证）。
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { resolve, dirname, posix } from 'node:path';
+import { resolve, dirname, posix, sep } from 'node:path';
 import { deflateRawSync } from 'node:zlib';
 import { Marked } from 'marked';
 import { ROOT, REPO, SITE, TITLE, read, readBook, gitCommit, buildStamp, stripBackLink } from '../lib/book.mjs';
 
 const OUT = resolve(ROOT, process.argv[2] ?? 'dist/HowToLiveBetter.epub');
+if (OUT !== ROOT && !OUT.startsWith(ROOT + sep)) {
+  throw new Error(`输出路径必须在仓库目录内：${OUT}`);
+}
 const RELEASE = `${REPO}/releases/download/epub-latest/HowToLiveBetter.epub`;
 const BOOK_ID = 'urn:uuid:5c0c1c0e-6a5c-4d2b-9b1e-7d1f0a4e8c31';
 const NOW = new Date();
